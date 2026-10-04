@@ -1,0 +1,463 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  ACTOR
+  CASTER
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  NON_BINARY
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+enum SexualOrientation {
+  STRAIGHT
+  GAY
+  LESBIAN
+  BISEXUAL
+  PANSEXUAL
+  ASEXUAL
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+enum Skill {
+  ACTING
+  DANCING
+  SINGING
+  SWIMMING
+  FIGHTING
+  MARTIAL_ARTS
+  HORSE_RIDING
+  STUNT_PERFORMANCE
+  GYMNASTICS
+  CYCLING
+  MODELING
+  VOICE_ACTING
+  COMEDY
+  ACCENT_IMPERSONATION
+  OTHER
+}
+
+enum MediaType {
+  PHOTO
+  VIDEO
+}
+
+enum ProjectStatus {
+  DRAFT
+  PUBLISHED
+  CLOSED
+}
+
+enum ProjectType {
+  FEATURE_FILM
+  SHORT_FILM
+  WEB_SERIES
+  TV_SERIES
+  ADVERTISEMENT
+  MUSIC_VIDEO
+  THEATRE
+  OTHER
+}
+
+enum GenderRequirement {
+  MALE
+  FEMALE
+  ANY
+}
+
+enum CastingRoleStatus {
+  OPEN
+  CLOSED
+}
+
+enum ApplicationStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+enum CastingRequestStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+enum SubscriptionPlanType {
+  ACTOR_PREMIUM
+  CASTER_PREMIUM
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}
+
+enum MessageType {
+  TEXT
+  SYSTEM
+}
+
+enum NotificationType {
+  APPLICATION_ACCEPTED
+  APPLICATION_REJECTED
+  CASTING_REQUEST_RECEIVED
+  CASTING_REQUEST_ACCEPTED
+  CASTING_REQUEST_REJECTED
+  NEW_MESSAGE
+  APPLICATION_DEADLINE
+  GENERAL
+}
+
+enum ReportStatus {
+  PENDING
+  UNDER_REVIEW
+  RESOLVED
+  DISMISSED
+}
+
+enum ReportTargetType {
+  USER
+  PROFILE
+  PROJECT
+  CASTING_ROLE
+  MEDIA
+  MESSAGE
+}
+
+model User {
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  phone         String   @unique
+  passwordHash  String
+  role          UserRole
+  emailVerified Boolean  @default(false)
+  phoneVerified Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  actorProfile  ActorProfile?
+  casterProfile CasterProfile?
+
+  subscriptions Subscription[]
+  messages      Message[]
+  notifications Notification[]
+
+  reportsSubmitted Report[] @relation("Reporter")
+  reportsReceived  Report[] @relation("ReportedUser")
+}
+
+model ActorProfile {
+  id                String            @id @default(uuid())
+  userId            String            @unique
+  displayName       String
+  dateOfBirth       DateTime
+  gender            Gender
+  sexualOrientation SexualOrientation
+  bio               String?
+  skills            Skill[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  media           Media[]
+  experiences     Experience[]
+  applications    Application[]
+  castingRequests CastingRequest[] @relation("ActorRequests")
+  profileViews    ProfileView[]
+  conversations   Conversation[]   @relation("ActorConversations")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CasterProfile {
+  id          String  @id @default(uuid())
+  userId      String  @unique
+  displayName String
+  bio         String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  projects        Project[]
+  castingRequests CastingRequest[] @relation("CasterRequests")
+  profileViews    ProfileView[]
+  conversations   Conversation[]   @relation("CasterConversations")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Media {
+  id               String    @id @default(uuid())
+  actorId          String
+  type             MediaType
+  storageKey       String    @unique
+  originalFileName String
+  mimeType         String
+  fileSize         Int
+  duration         Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  actor ActorProfile @relation(fields: [actorId], references: [id], onDelete: Cascade)
+
+  @@index([actorId])
+}
+
+model Experience {
+  id           String    @id @default(uuid())
+  actorId      String
+  roleTitle    String
+  organization String?
+  description  String?
+  startDate    DateTime?
+  endDate      DateTime?
+  isCurrent    Boolean   @default(false)
+
+  actor ActorProfile @relation(fields: [actorId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([actorId])
+}
+
+model Project {
+  id                  String        @id @default(uuid())
+  casterId            String
+  title               String
+  description         String
+  projectType         ProjectType
+  location            String
+  startDate           DateTime?
+  endDate             DateTime?
+  applicationDeadline DateTime?
+  status              ProjectStatus @default(DRAFT)
+
+  caster       CasterProfile @relation(fields: [casterId], references: [id], onDelete: Cascade)
+  castingRoles CastingRole[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([casterId])
+  @@index([status])
+}
+
+model CastingRole {
+  id                String            @id @default(uuid())
+  projectId         String
+  title             String
+  description       String
+  genderRequirement GenderRequirement @default(ANY)
+  minAge            Int?
+  maxAge            Int?
+  status            CastingRoleStatus @default(OPEN)
+
+  project         Project          @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  applications    Application[]
+  castingRequests CastingRequest[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([projectId])
+  @@index([status])
+}
+
+model Application {
+  id            String            @id @default(uuid())
+  actorId       String
+  castingRoleId String
+  status        ApplicationStatus @default(PENDING)
+  appliedAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  actor       ActorProfile @relation(fields: [actorId], references: [id], onDelete: Cascade)
+  castingRole CastingRole  @relation(fields: [castingRoleId], references: [id], onDelete: Cascade)
+
+  @@unique([actorId, castingRoleId])
+  @@index([castingRoleId])
+  @@index([actorId])
+  @@index([status])
+}
+
+model CastingRequest {
+  id            String               @id @default(uuid())
+  casterId      String
+  actorId       String
+  castingRoleId String?
+  status        CastingRequestStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  caster      CasterProfile @relation("CasterRequests", fields: [casterId], references: [id], onDelete: Cascade)
+  actor       ActorProfile  @relation("ActorRequests", fields: [actorId], references: [id], onDelete: Cascade)
+  castingRole CastingRole?  @relation(fields: [castingRoleId], references: [id], onDelete: Cascade)
+
+  @@index([casterId])
+  @@index([actorId])
+  @@index([castingRoleId])
+  @@index([status])
+}
+
+model SubscriptionPlan {
+  id           String               @id @default(uuid())
+  type         SubscriptionPlanType @unique
+  name         String
+  price        Decimal              @db.Decimal(10, 2)
+  durationDays Int                  @default(30)
+  isActive     Boolean              @default(true)
+
+  subscriptions Subscription[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Subscription {
+  id        String             @id @default(uuid())
+  userId    String
+  planId    String
+  status    SubscriptionStatus @default(ACTIVE)
+  startDate DateTime
+  endDate   DateTime
+  autoRenew Boolean            @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan SubscriptionPlan @relation(fields: [planId], references: [id])
+
+  @@index([userId])
+  @@index([planId])
+  @@index([status])
+  @@index([endDate])
+}
+
+model ProfileView {
+  id       String   @id @default(uuid())
+  actorId  String
+  viewerId String
+  viewedAt DateTime @default(now())
+
+  actor  ActorProfile  @relation(fields: [actorId], references: [id], onDelete: Cascade)
+  viewer CasterProfile @relation(fields: [viewerId], references: [id], onDelete: Cascade)
+
+  @@index([actorId])
+  @@index([viewerId])
+  @@index([viewedAt])
+}
+
+model Conversation {
+  id       String @id @default(uuid())
+  actorId  String
+  casterId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  actor    ActorProfile  @relation("ActorConversations", fields: [actorId], references: [id], onDelete: Cascade)
+  caster   CasterProfile @relation("CasterConversations", fields: [casterId], references: [id], onDelete: Cascade)
+  messages Message[]
+
+  @@unique([actorId, casterId])
+  @@index([actorId])
+  @@index([casterId])
+}
+
+model Message {
+  id             String      @id @default(uuid())
+  conversationId String
+  senderId       String?
+  type           MessageType
+  content        String
+
+  createdAt DateTime @default(now())
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender       User?        @relation(fields: [senderId], references: [id], onDelete: SetNull)
+
+  @@index([conversationId])
+  @@index([senderId])
+  @@index([createdAt])
+}
+
+model Notification {
+  id          String           @id @default(uuid())
+  userId      String
+  type        NotificationType
+  title       String
+  message     String
+  referenceId String?
+  isRead      Boolean          @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, isRead])
+  @@index([createdAt])
+}
+
+model Admin {
+  id           String @id @default(uuid())
+  name         String
+  email        String @unique
+  passwordHash String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  reports Report[]
+}
+
+model Report {
+  id             String           @id @default(uuid())
+  reporterId     String?
+  reportedUserId String?
+  targetType     ReportTargetType
+  targetId       String
+  reason         String
+  description    String?
+  status         ReportStatus     @default(PENDING)
+  adminId        String?
+  resolutionNote String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  reporter     User?  @relation("Reporter", fields: [reporterId], references: [id], onDelete: SetNull)
+  reportedUser User?  @relation("ReportedUser", fields: [reportedUserId], references: [id], onDelete: SetNull)
+  admin        Admin? @relation(fields: [adminId], references: [id], onDelete: SetNull)
+
+  @@index([reporterId])
+  @@index([reportedUserId])
+  @@index([targetType, targetId])
+  @@index([status])
+  @@index([adminId])
+}
