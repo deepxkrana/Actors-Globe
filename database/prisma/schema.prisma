@@ -79,6 +79,8 @@ enum ProjectType {
 enum GenderRequirement {
   MALE
   FEMALE
+  NON_BINARY
+  OTHER
   ANY
 }
 
