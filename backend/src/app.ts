@@ -13,6 +13,7 @@ import applicationRoutes from "./routes/application.routes.js";
 import castingRequestRoutes from "./routes/casting-request.routes.js";
 import notificationRoutes from "./routes/notification.routes.js";
 import conversationRoutes from "./routes/conversation.routes.js";
+import subscriptionRoutes from "./routes/subscription.routes.js";
 
 const app = express();
 
@@ -24,7 +25,13 @@ app.use(
   })
 );
 app.use(cookieParser());
-app.use(express.json());
+app.use(
+  express.json({
+    verify: (req: any, _res, buf) => {
+      req.rawBody = buf;
+    }
+  })
+);
 
 // Static file serving for local media storage
 app.use("/uploads", express.static(config.uploadsDir));
@@ -38,6 +45,7 @@ app.use("/api/applications", applicationRoutes);
 app.use("/api/casting-requests", castingRequestRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/conversations", conversationRoutes);
+app.use("/api/subscriptions", subscriptionRoutes);
 
 app.get("/api/health", async (_req: Request, res: Response) => {
   try {

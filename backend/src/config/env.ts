@@ -31,5 +31,12 @@ export const config = {
     endpoint: process.env.S3_ENDPOINT || undefined,
     accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || ""
-  }
+  },
+
+  // Payments
+  paymentGatewaySecret:
+    process.env.PAYMENT_GATEWAY_SECRET || "actorsglobe_payment_gateway_secret_key_default",
+  paymentWebhookSecret:
+    process.env.PAYMENT_WEBHOOK_SECRET || "actorsglobe_payment_webhook_secret_key_default",
+  paymentKeyId: process.env.PAYMENT_KEY_ID || "rzp_test_actorsglobe_key_id"
 };

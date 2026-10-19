@@ -125,7 +125,15 @@ enum NotificationType {
   CASTING_REQUEST_REJECTED
   NEW_MESSAGE
   APPLICATION_DEADLINE
+  PAYMENT_SUCCESS
+  SUBSCRIPTION_EXPIRED
   GENERAL
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
 }
 
 enum ReportStatus {
@@ -170,6 +178,7 @@ model User {
   subscriptions Subscription[]
   messages      Message[]
   notifications Notification[]
+  paymentTransactions PaymentTransaction[]
 
   reportsSubmitted Report[] @relation("Reporter")
   reportsReceived  Report[] @relation("ReportedUser")
@@ -358,7 +367,8 @@ model SubscriptionPlan {
   durationDays Int                  @default(30)
   isActive     Boolean              @default(true)
 
-  subscriptions Subscription[]
+  subscriptions       Subscription[]
+  paymentTransactions PaymentTransaction[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -376,13 +386,44 @@ model Subscription {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  plan SubscriptionPlan @relation(fields: [planId], references: [id])
+  user                User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan                SubscriptionPlan     @relation(fields: [planId], references: [id])
+  paymentTransactions PaymentTransaction[]
 
   @@index([userId])
   @@index([planId])
   @@index([status])
   @@index([endDate])
+}
+
+model PaymentTransaction {
+  id             String        @id @default(uuid())
+  userId         String
+  planId         String
+  subscriptionId String?
+  amount         Decimal       @db.Decimal(10, 2)
+  currency       String        @default("INR")
+  status         PaymentStatus @default(PENDING)
+  provider       String        @default("RAZORPAY")
+  orderId        String        @unique
+  paymentId      String?
+  signature      String?
+  idempotencyKey String?       @unique
+  metadata       Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user         User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan         SubscriptionPlan  @relation(fields: [planId], references: [id])
+  subscription Subscription?     @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([planId])
+  @@index([subscriptionId])
+  @@index([status])
+  @@index([orderId])
+  @@index([paymentId])
 }
 
 model ProfileView {
