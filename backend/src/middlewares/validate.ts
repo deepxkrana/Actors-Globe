@@ -18,3 +18,31 @@ export const validate = (schema: ZodType) => {
     next();
   };
 };
+
+export const validateQuery = (schema: ZodType) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    const result = schema.safeParse(req.query);
+
+    if (!result.success) {
+      res.status(400).json({
+        success: false,
+        message: "Validation failed",
+        errors: result.error.issues
+      });
+      return;
+    }
+
+    try {
+      Object.defineProperty(req, "query", {
+        value: result.data,
+        writable: true,
+        configurable: true,
+        enumerable: true
+      });
+    } catch {
+      // Fallback if defineProperty fails
+    }
+    (req as any).validatedQuery = result.data;
+    next();
+  };
+};

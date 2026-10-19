@@ -8,6 +8,7 @@ import authRoutes from "./routes/auth.routes.js";
 import profileRoutes from "./routes/profile.routes.js";
 import mediaRoutes from "./routes/media.routes.js";
 import projectRoutes from "./routes/project.routes.js";
+import searchRoutes from "./routes/search.routes.js";
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/profiles", profileRoutes);
 app.use("/api/media", mediaRoutes);
 app.use("/api/projects", projectRoutes);
+app.use("/api/search", searchRoutes);
 
 app.get("/api/health", async (_req: Request, res: Response) => {
   try {
