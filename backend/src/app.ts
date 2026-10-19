@@ -6,6 +6,7 @@ import prisma from "./config/prisma.js";
 import { config } from "./config/env.js";
 import authRoutes from "./routes/auth.routes.js";
 import profileRoutes from "./routes/profile.routes.js";
+import mediaRoutes from "./routes/media.routes.js";
 
 const app = express();
 
@@ -19,8 +20,12 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 
+// Static file serving for local media storage
+app.use("/uploads", express.static(config.uploadsDir));
+
 app.use("/api/auth", authRoutes);
 app.use("/api/profiles", profileRoutes);
+app.use("/api/media", mediaRoutes);
 
 app.get("/api/health", async (_req: Request, res: Response) => {
   try {
