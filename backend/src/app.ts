@@ -12,6 +12,7 @@ import searchRoutes from "./routes/search.routes.js";
 import applicationRoutes from "./routes/application.routes.js";
 import castingRequestRoutes from "./routes/casting-request.routes.js";
 import notificationRoutes from "./routes/notification.routes.js";
+import conversationRoutes from "./routes/conversation.routes.js";
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use("/api/search", searchRoutes);
 app.use("/api/applications", applicationRoutes);
 app.use("/api/casting-requests", castingRequestRoutes);
 app.use("/api/notifications", notificationRoutes);
+app.use("/api/conversations", conversationRoutes);
 
 app.get("/api/health", async (_req: Request, res: Response) => {
   try {
