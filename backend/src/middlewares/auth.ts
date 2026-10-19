@@ -74,3 +74,29 @@ export const authorizeRole = (...allowedRoles: Array<"ACTOR" | "CASTER">) => {
     next();
   };
 };
+
+export const optionalAuthenticate = (
+  req: Request,
+  _res: Response,
+  next: NextFunction
+): void => {
+  let token: string | undefined;
+
+  if (req.cookies && req.cookies.token) {
+    token = req.cookies.token;
+  }
+
+  if (!token && req.headers.authorization && req.headers.authorization.startsWith("Bearer ")) {
+    token = req.headers.authorization.substring(7).trim();
+  }
+
+  if (token) {
+    const payload = verifyToken(token);
+    if (payload) {
+      req.user = payload;
+    }
+  }
+
+  next();
+};
+
