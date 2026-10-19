@@ -14,6 +14,8 @@ import castingRequestRoutes from "./routes/casting-request.routes.js";
 import notificationRoutes from "./routes/notification.routes.js";
 import conversationRoutes from "./routes/conversation.routes.js";
 import subscriptionRoutes from "./routes/subscription.routes.js";
+import adminRoutes from "./routes/admin.routes.js";
+import reportRoutes from "./routes/report.routes.js";
 
 const app = express();
 
@@ -46,6 +48,8 @@ app.use("/api/casting-requests", castingRequestRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/conversations", conversationRoutes);
 app.use("/api/subscriptions", subscriptionRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/reports", reportRoutes);
 
 app.get("/api/health", async (_req: Request, res: Response) => {
   try {
