@@ -1,17 +1,28 @@
-import express from "express";
+import express, { type Request, type Response, type NextFunction } from "express";
 import cors from "cors";
 import helmet from "helmet";
+import cookieParser from "cookie-parser";
 import prisma from "./config/prisma.js";
+import { config } from "./config/env.js";
 import authRoutes from "./routes/auth.routes.js";
+import profileRoutes from "./routes/profile.routes.js";
 
 const app = express();
 
 app.use(helmet());
-app.use(cors());
+app.use(
+  cors({
+    origin: config.frontendUrl,
+    credentials: true
+  })
+);
+app.use(cookieParser());
 app.use(express.json());
-app.use("/api/auth", authRoutes);
 
-app.get("/api/health", async (_req, res) => {
+app.use("/api/auth", authRoutes);
+app.use("/api/profiles", profileRoutes);
+
+app.get("/api/health", async (_req: Request, res: Response) => {
   try {
     await prisma.$queryRaw`SELECT 1`;
 
@@ -26,6 +37,17 @@ app.get("/api/health", async (_req, res) => {
       message: "Database connection failed"
     });
   }
+});
+
+// Centralized error handler
+app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
+  const message =
+    err instanceof Error ? err.message : "An unexpected server error occurred";
+
+  res.status(500).json({
+    success: false,
+    message
+  });
 });
 
 export default app;

@@ -144,6 +144,12 @@ enum ReportTargetType {
   MESSAGE
 }
 
+enum VerificationType {
+  EMAIL_VERIFICATION
+  PHONE_VERIFICATION
+  PASSWORD_RESET
+}
+
 model User {
   id            String   @id @default(uuid())
   name          String
@@ -153,6 +159,7 @@ model User {
   role          UserRole
   emailVerified Boolean  @default(false)
   phoneVerified Boolean  @default(false)
+  isActive      Boolean  @default(true)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -166,6 +173,25 @@ model User {
 
   reportsSubmitted Report[] @relation("Reporter")
   reportsReceived  Report[] @relation("ReportedUser")
+
+  verificationChallenges VerificationChallenge[]
+}
+
+model VerificationChallenge {
+  id          String           @id @default(uuid())
+  userId      String
+  type        VerificationType
+  tokenHash   String
+  expiresAt   DateTime
+  attempts    Int              @default(0)
+  maxAttempts Int              @default(5)
+  isUsed      Boolean          @default(false)
+  createdAt   DateTime         @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, type])
+  @@index([expiresAt])
 }
 
 model ActorProfile {
