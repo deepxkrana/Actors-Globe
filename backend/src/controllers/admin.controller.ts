@@ -3,7 +3,8 @@ import * as adminService from "../services/admin.service.js";
 
 export const adminLogin = async (req: Request, res: Response) => {
   try {
-    const { email, password } = req.body;
+    const { email } = req.body;
+    const password = req.body.password || req.body.secretKey;
     const { admin, token } = await adminService.loginAdmin(email, password);
 
     // Set secure HttpOnly cookie for admin session

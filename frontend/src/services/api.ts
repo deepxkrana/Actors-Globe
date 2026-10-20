@@ -290,7 +290,11 @@ class ApiClient {
   async adminLogin(secretKey: string, email?: string) {
     const res = await this.request<{ token: string; admin: any }>("/admin/login", {
       method: "POST",
-      body: JSON.stringify({ secretKey, email })
+      body: JSON.stringify({
+        email: email || "admin@actorsglobe.com",
+        password: secretKey,
+        secretKey
+      })
     });
     if (res.success && res.data?.token) {
       this.setAdminToken(res.data.token);
@@ -299,7 +303,7 @@ class ApiClient {
   }
 
   async getAdminStats() {
-    return this.request<any>("/admin/stats", {}, true);
+    return this.request<any>("/admin/dashboard/stats", {}, true);
   }
 
   async getAdminReports(status?: string) {

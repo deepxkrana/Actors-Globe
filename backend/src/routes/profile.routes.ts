@@ -30,6 +30,27 @@ const router = Router();
 // Metadata (skills, genders, sexual orientations)
 router.get("/metadata", getMetadataHandler);
 
+// Unified Profile Routes (resolves automatically based on JWT role)
+router.get("/me", authenticate, async (req, res) => {
+  if (req.user?.role === "ACTOR") {
+    return getMyActorProfileHandler(req, res);
+  } else if (req.user?.role === "CASTER") {
+    return getMyCasterProfileHandler(req, res);
+  } else {
+    res.status(400).json({ success: false, message: "Invalid user role" });
+  }
+});
+
+router.put("/me", authenticate, async (req, res) => {
+  if (req.user?.role === "ACTOR") {
+    return updateActorProfileHandler(req, res);
+  } else if (req.user?.role === "CASTER") {
+    return updateCasterProfileHandler(req, res);
+  } else {
+    res.status(400).json({ success: false, message: "Invalid user role" });
+  }
+});
+
 // -------------------------------------------------------------
 // Actor Profile Routes
 // -------------------------------------------------------------

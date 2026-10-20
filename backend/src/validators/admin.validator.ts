@@ -2,7 +2,11 @@ import { z } from "zod";
 
 export const adminLoginSchema = z.object({
   email: z.string().trim().email("Invalid email address"),
-  password: z.string().min(1, "Password is required")
+  password: z.string().min(1).optional(),
+  secretKey: z.string().min(1).optional()
+}).refine(data => Boolean(data.password || data.secretKey), {
+  message: "Password or secret key is required",
+  path: ["password"]
 });
 
 export const updateReportStatusSchema = z.object({
