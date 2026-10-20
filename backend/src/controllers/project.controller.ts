@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+import prisma from "../config/prisma.js";
 import {
   createProject,
   addCastingRole,
@@ -237,3 +238,45 @@ export const getProjectByIdHandler = async (req: Request, res: Response): Promis
     });
   }
 };
+
+export const getRoleByIdHandler = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const roleId = req.params.roleId as string;
+    const role = await prisma.castingRole.findUnique({
+      where: { id: roleId },
+      include: {
+        project: {
+          include: {
+            caster: {
+              select: {
+                id: true,
+                displayName: true,
+                bio: true
+              }
+            }
+          }
+        }
+      }
+    });
+
+    if (!role) {
+      res.status(404).json({
+        success: false,
+        message: "Casting role not found"
+      });
+      return;
+    }
+
+    res.status(200).json({
+      success: true,
+      data: role
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Failed to fetch casting role";
+    res.status(500).json({
+      success: false,
+      message
+    });
+  }
+};
+

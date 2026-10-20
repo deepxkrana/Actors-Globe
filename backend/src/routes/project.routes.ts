@@ -8,7 +8,8 @@ import {
   updateProjectHandler,
   getMyProjectsHandler,
   getPublicProjectsHandler,
-  getProjectByIdHandler
+  getProjectByIdHandler,
+  getRoleByIdHandler
 } from "../controllers/project.controller.js";
 import { authenticate, authorizeRole, optionalAuthenticate } from "../middlewares/auth.js";
 import { validate } from "../middlewares/validate.js";
@@ -35,6 +36,9 @@ router.get(
   authorizeRole("CASTER"),
   getMyProjectsHandler
 );
+
+// Get single role details
+router.get("/roles/:roleId", optionalAuthenticate, getRoleByIdHandler);
 
 // Get single project details (drafts only visible to creator)
 router.get("/:projectId", optionalAuthenticate, getProjectByIdHandler);

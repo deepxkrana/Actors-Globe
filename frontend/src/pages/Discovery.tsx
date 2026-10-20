@@ -22,11 +22,19 @@ export const Discovery: React.FC = () => {
         roleType: selectedRoleType || undefined,
         unionStatus: selectedUnion || undefined
       });
-      if (res.success && res.data) {
-        setRoles(res.data);
+      if (res && res.success && res.data) {
+        const rawData = res.data as any;
+        const roleItems = Array.isArray(rawData)
+          ? rawData
+          : Array.isArray(rawData.items)
+          ? rawData.items
+          : [];
+        setRoles(roleItems);
+      } else {
+        setRoles([]);
       }
     } catch {
-      // Fallback fallback sample roles if backend has no active projects yet
+      // Fallback if backend returns error or has no active projects
       setRoles([]);
     } finally {
       setLoading(false);
@@ -150,7 +158,7 @@ export const Discovery: React.FC = () => {
             <div className="w-8 h-8 rounded-full border-2 border-[#F7FFB8] border-t-transparent animate-spin mr-3" />
             <span>Scanning casting notices...</span>
           </div>
-        ) : roles.length === 0 ? (
+        ) : !Array.isArray(roles) || roles.length === 0 ? (
           <div className="text-center py-20 rounded-4xl bg-[#0E0E0F] border border-white/10 p-8">
             <Film className="w-12 h-12 text-[#8A8A90] mx-auto mb-4 opacity-50" />
             <h3 className="text-xl font-medium text-white mb-2">No active casting notices found</h3>
@@ -160,7 +168,7 @@ export const Discovery: React.FC = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {roles.map((role) => (
+            {(Array.isArray(roles) ? roles : []).map((role: any) => (
               <div
                 key={role.id}
                 className="rounded-[28px] bg-[#0D0D0E] border border-white/10 p-6 flex flex-col justify-between hover:border-white/30 transition-all duration-300 group"
@@ -169,15 +177,15 @@ export const Discovery: React.FC = () => {
                   {/* Top Badges */}
                   <div className="flex items-center justify-between mb-4">
                     <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-[#F7FFB8]">
-                      {role.roleType}
+                      {role.roleType || role.genderRequirement || "OPEN"}
                     </span>
                     <span className="text-xs text-[#8A8A90]">
-                      {role.isUnion ? "SAG-AFTRA" : "Non-Union"}
+                      {role.isUnion ? "SAG-AFTRA" : role.project?.location || "Open Call"}
                     </span>
                   </div>
 
                   <h3 className="text-xl font-medium text-white group-hover:text-[#F7FFB8] transition-colors leading-snug mb-1">
-                    {role.characterName || role.name}
+                    {role.characterName || role.name || role.title || "Audition Role"}
                   </h3>
 
                   {role.project && (
@@ -193,7 +201,7 @@ export const Discovery: React.FC = () => {
 
                 <div className="pt-4 border-t border-white/10 flex items-center justify-between mt-auto">
                   <div className="flex flex-col text-xs text-[#8A8A90]">
-                    <span>Age: {role.ageMin || 18}–{role.ageMax || 65}</span>
+                    <span>Age: {role.minAge || role.ageMin || 18}–{role.maxAge || role.ageMax || 65}</span>
                     <span className="text-white font-medium">{role.payRate || "Competitive Day Rate"}</span>
                   </div>
 
