@@ -93,7 +93,7 @@ export const Home: React.FC = () => {
           SECTION A: HERO SLIDESHOW
          ========================================================================= */}
       <section className="px-4 md:px-7 pt-2">
-        <div className="relative w-full rounded-[28px] md:rounded-[36px] min-h-[640px] md:min-h-[760px] overflow-hidden border border-white/10 flex flex-col justify-between p-6 md:p-14 bg-black">
+        <div className="relative w-full rounded-[28px] md:rounded-[36px] min-h-160 md:min-h-190 overflow-hidden border border-white/10 flex flex-col justify-between p-6 md:p-14 bg-black">
           {/* Slideshow Background Images with Cross-Fade */}
           {HERO_SLIDES.map((s, index) => (
             <div
@@ -110,8 +110,8 @@ export const Home: React.FC = () => {
           ))}
 
           {/* Scrim Gradient Overlays for pristine typographic contrast */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/30 pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/30 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-black/30 pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/30 to-transparent pointer-events-none" />
 
           {/* Top Bar inside Hero: Tag Badge + Top-Right Author Card */}
           <div className="relative z-10 flex items-start justify-between w-full">
@@ -120,7 +120,7 @@ export const Home: React.FC = () => {
             </div>
 
             {/* Author Card (Top-Right on Desktop) */}
-            <div className="hidden sm:flex items-center gap-3.5 p-2 pr-4 rounded-[24px] glass border border-white/15 max-w-xs animate-in fade-in duration-500">
+            <div className="hidden sm:flex items-center gap-3.5 p-2 pr-4 rounded-3xl glass border border-white/15 max-w-xs animate-in fade-in duration-500">
               <img
                 src={slide.authorAvatar}
                 alt={slide.authorName}
@@ -202,7 +202,7 @@ export const Home: React.FC = () => {
       <section className="px-4 md:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left: Section Marker + Ambient Halftone Globe Visual */}
-          <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[320px] relative">
+          <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-80 relative">
             <div>
               <span className="text-sm md:text-base font-medium tracking-wider text-[#8A8A90]">
                 (01) About Us
@@ -240,7 +240,7 @@ export const Home: React.FC = () => {
                   href="https://twitter.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-10 h-10 rounded-full bg-white/[0.05] border border-white/10 hover:border-white/30 flex items-center justify-center text-white/80 hover:text-white transition-colors"
+                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:border-white/30 flex items-center justify-center text-white/80 hover:text-white transition-colors"
                   aria-label="Twitter"
                 >
                   <TwitterIcon className="w-4 h-4" />
@@ -249,7 +249,7 @@ export const Home: React.FC = () => {
                   href="https://instagram.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-10 h-10 rounded-full bg-white/[0.05] border border-white/10 hover:border-white/30 flex items-center justify-center text-white/80 hover:text-white transition-colors"
+                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:border-white/30 flex items-center justify-center text-white/80 hover:text-white transition-colors"
                   aria-label="Instagram"
                 >
                   <InstagramIcon className="w-4 h-4" />
@@ -258,7 +258,7 @@ export const Home: React.FC = () => {
                   href="https://facebook.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-10 h-10 rounded-full bg-white/[0.05] border border-white/10 hover:border-white/30 flex items-center justify-center text-white/80 hover:text-white transition-colors"
+                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:border-white/30 flex items-center justify-center text-white/80 hover:text-white transition-colors"
                   aria-label="Facebook"
                 >
                   <FacebookIcon className="w-4 h-4" />
@@ -281,7 +281,7 @@ export const Home: React.FC = () => {
           SECTION C: (02) OUR EXPERIENCE CAROUSEL
          ========================================================================= */}
       <section className="px-4 md:px-7">
-        <div className="rounded-[32px] bg-[#0D0D0E] border border-white/10 p-6 md:p-10 relative overflow-hidden">
+        <div className="rounded-4xl bg-[#0D0D0E] border border-white/10 p-6 md:p-10 relative overflow-hidden">
           <div className="flex flex-col lg:flex-row justify-between items-start gap-8 mb-8">
             <div>
               <span className="text-xs md:text-sm font-medium tracking-wider text-[#8A8A90] uppercase">
@@ -350,17 +350,17 @@ export const Home: React.FC = () => {
 
             {/* Right Side: Active Main Slide + Side Peeking Card */}
             <div className="lg:col-span-8 relative flex gap-4 overflow-hidden rounded-[28px]">
-              <div className="w-full md:w-[85%] flex-shrink-0 h-[380px] md:h-[480px] rounded-[28px] overflow-hidden border border-white/10 relative">
+              <div className="w-full md:w-[85%] shrink-0 h-95 md:h-120 rounded-[28px] overflow-hidden border border-white/10 relative">
                 <img
                   src={experienceSlides[experienceIndex].imageUrl}
                   alt={experienceSlides[experienceIndex].title}
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
               </div>
 
               {/* Peeking Next Slide */}
-              <div className="hidden md:block w-[20%] flex-shrink-0 h-[480px] rounded-[28px] overflow-hidden opacity-40 border border-white/10">
+              <div className="hidden md:block w-[20%] shrink-0 h-120 rounded-[28px] overflow-hidden opacity-40 border border-white/10">
                 <img
                   src={experienceSlides[(experienceIndex + 1) % experienceSlides.length].imageUrl}
                   alt="Next Peek"
@@ -394,16 +394,16 @@ export const Home: React.FC = () => {
         </div>
 
         {/* 3 Bento Cards with Flex-Grow Expand Interaction */}
-        <div className="flex flex-col lg:flex-row gap-5 min-h-[560px]">
+        <div className="flex flex-col lg:flex-row gap-5 min-h-140">
           {EDITORS_PICKS.map((pick) => {
             const isExpanded = expandedPickId === pick.id;
             return (
               <div
                 key={pick.id}
                 onMouseEnter={() => setExpandedPickId(pick.id)}
-                className={`relative rounded-[32px] md:rounded-[36px] overflow-hidden border border-white/10 transition-all duration-500 ease-out cursor-pointer flex flex-col justify-between p-6 md:p-8 ${
+                className={`relative rounded-4xl md:rounded-[36px] overflow-hidden border border-white/10 transition-all duration-500 ease-out cursor-pointer flex flex-col justify-between p-6 md:p-8 ${
                   isExpanded ? "lg:flex-[2.2]" : "lg:flex-1"
-                } h-[520px] lg:h-[580px]`}
+                } h-130 lg:h-145`}
               >
                 {/* Background Image */}
                 <img
@@ -411,7 +411,7 @@ export const Home: React.FC = () => {
                   alt={pick.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20 pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-black/20 pointer-events-none" />
 
                 {/* Top-Left User Chip */}
                 <div className="relative z-10 self-start flex items-center gap-2 px-3 py-1.5 rounded-full glass border border-white/15">
@@ -469,7 +469,8 @@ export const Home: React.FC = () => {
               </p>
             </div>
 
-            <div className="flex flex-col divide-y divide-white/10 border-t border-b border-white/10 mt-2">
+            <div className="border-y border-white/10 mt-2">
+              <div className="flex flex-col divide-y divide-white/10">
               {factsList.map((fact, index) => {
                 const isOpen = openAccordionIndex === index;
                 const Icon = fact.icon;
@@ -505,12 +506,13 @@ export const Home: React.FC = () => {
                   </div>
                 );
               })}
+              </div>
             </div>
           </div>
 
           {/* Right: 3D Glowing Emerald Squircle Card with 50K+ Members */}
           <div className="lg:col-span-6 flex justify-center">
-            <div className="w-full max-w-[540px] aspect-square rounded-[60px] md:rounded-[90px] emerald-stats-mesh p-8 md:p-12 relative flex items-center justify-center overflow-hidden">
+            <div className="w-full max-w-135 aspect-square rounded-[60px] md:rounded-[90px] emerald-stats-mesh p-8 md:p-12 relative flex items-center justify-center overflow-hidden">
               {/* Center Frosted Glass Circle */}
               <div className="w-64 h-64 md:w-80 md:h-80 rounded-full glass border border-white/30 backdrop-blur-3xl flex flex-col items-center justify-center text-center shadow-2xl relative z-10">
                 <span className="text-5xl md:text-7xl font-bold tracking-tight text-white">
@@ -545,7 +547,7 @@ export const Home: React.FC = () => {
           SECTION F: APP DOWNLOAD CARD & 5-DEVICE SWEEPING ARC
          ========================================================================= */}
       <section className="px-4 md:px-7">
-        <div className="rounded-[40px] bg-gradient-to-b from-[#151915] via-[#3E4A36] to-[#A9C185] p-8 md:p-16 border border-white/15 flex flex-col items-center text-center relative overflow-hidden">
+        <div className="rounded-[40px] bg-linear-to-b from-[#151915] via-[#3E4A36] to-[#A9C185] p-8 md:p-16 border border-white/15 flex flex-col items-center text-center relative overflow-hidden">
           <Headline
             text="Get the *full range of features* by downloading our *mobile app.*"
             as="h2"
@@ -585,7 +587,7 @@ export const Home: React.FC = () => {
             ].map((device, i) => (
               <div
                 key={i}
-                className={`rounded-t-[32px] border-t-2 border-x-2 border-white/30 bg-[#0A0A0A] overflow-hidden shadow-2xl transition-all duration-300 ${
+                className={`rounded-t-4xl border-t-2 border-x-2 border-white/30 bg-[#0A0A0A] overflow-hidden shadow-2xl transition-all duration-300 ${
                   device.isCenter
                     ? "w-44 md:w-56 h-60 md:h-76 z-20 scale-105"
                     : "w-32 md:w-40 h-48 md:h-60 opacity-80"
@@ -620,7 +622,7 @@ export const Home: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 max-w-5xl mx-auto">
           {/* Card 1: Wide - No loss of quality */}
-          <div className="md:col-span-7 rounded-[28px] bg-[#0D0D0E] border border-white/10 p-7 flex flex-col justify-between min-h-[320px]">
+          <div className="md:col-span-7 rounded-[28px] bg-[#0D0D0E] border border-white/10 p-7 flex flex-col justify-between min-h-80">
             <div className="h-40 rounded-2xl iridescent-border p-4 flex items-center justify-center relative overflow-hidden">
               <div className="w-32 h-24 rounded-lg bg-white/10 border border-white/20 shadow-xl -rotate-6 transform" />
               <div className="w-32 h-24 rounded-lg bg-white/20 border border-white/30 shadow-2xl rotate-6 transform absolute" />
@@ -634,7 +636,7 @@ export const Home: React.FC = () => {
           </div>
 
           {/* Card 2: Narrow - Collaborations That Inspire */}
-          <div className="md:col-span-5 rounded-[28px] bg-[#0D0D0E] border border-white/10 p-7 flex flex-col justify-between min-h-[320px]">
+          <div className="md:col-span-5 rounded-[28px] bg-[#0D0D0E] border border-white/10 p-7 flex flex-col justify-between min-h-80">
             <div className="h-40 flex items-center justify-center">
               <div className="flex -space-x-3">
                 {AMBASSADORS.slice(0, 4).map((a, i) => (
@@ -656,7 +658,7 @@ export const Home: React.FC = () => {
           </div>
 
           {/* Card 3: Narrow - Showcase That Sells */}
-          <div className="md:col-span-5 rounded-[28px] bg-[#0D0D0E] border border-white/10 p-7 flex flex-col justify-between min-h-[320px]">
+          <div className="md:col-span-5 rounded-[28px] bg-[#0D0D0E] border border-white/10 p-7 flex flex-col justify-between min-h-80">
             <div className="h-40 grid grid-cols-3 gap-2 p-2">
               {[...Array(6)].map((_, i) => (
                 <div
@@ -664,7 +666,7 @@ export const Home: React.FC = () => {
                   className={`rounded-xl border ${
                     i === 1
                       ? "border-[#F7FFB8] bg-[#F7FFB8]/10"
-                      : "border-white/10 bg-white/[0.02]"
+                      : "border-white/10 bg-white/2"
                   }`}
                 />
               ))}
@@ -678,7 +680,7 @@ export const Home: React.FC = () => {
           </div>
 
           {/* Card 4: Wide - Smart Networking */}
-          <div className="md:col-span-7 rounded-[28px] bg-[#0D0D0E] border border-white/10 p-7 flex flex-col justify-between min-h-[320px]">
+          <div className="md:col-span-7 rounded-[28px] bg-[#0D0D0E] border border-white/10 p-7 flex flex-col justify-between min-h-80">
             <div className="h-40 flex items-center justify-center relative">
               <div className="w-32 h-32 rounded-full border border-dashed border-white/20 animate-spin [animation-duration:30s] flex items-center justify-center">
                 <div className="w-20 h-20 rounded-full border border-white/30 flex items-center justify-center">
