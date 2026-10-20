@@ -104,7 +104,7 @@ class ApiClient {
     return res;
   }
 
-  async register(data: { email: string; password: string; name: string; role: "ACTOR" | "CASTER" }) {
+  async register(data: { email: string; password: string; name: string; phone?: string; role: "ACTOR" | "CASTER" }) {
     const res = await this.request<{ user: User; token?: string }>("/auth/register", {
       method: "POST",
       body: JSON.stringify(data)
@@ -119,10 +119,38 @@ class ApiClient {
     return this.request<User>("/auth/me");
   }
 
-  async verifyEmail(token: string) {
-    return this.request("/auth/verify-email", {
+  async verifyEmail(code: string) {
+    return this.request<{ user: User }>("/auth/verify-email", {
       method: "POST",
-      body: JSON.stringify({ token })
+      body: JSON.stringify({ code })
+    });
+  }
+
+  async verifyPhone(code: string) {
+    return this.request<{ user: User }>("/auth/verify-phone", {
+      method: "POST",
+      body: JSON.stringify({ code })
+    });
+  }
+
+  async resendVerification(type: "EMAIL" | "PHONE") {
+    return this.request<{ message: string; devVerificationCode?: string }>("/auth/resend-verification", {
+      method: "POST",
+      body: JSON.stringify({ type })
+    });
+  }
+
+  async forgotPassword(email: string) {
+    return this.request<{ message: string; devResetToken?: string }>("/auth/forgot-password", {
+      method: "POST",
+      body: JSON.stringify({ email })
+    });
+  }
+
+  async resetPassword(token: string, newPassword: string) {
+    return this.request<{ message: string }>("/auth/reset-password", {
+      method: "POST",
+      body: JSON.stringify({ token, newPassword })
     });
   }
 
@@ -136,18 +164,56 @@ class ApiClient {
   }
 
   async getActorProfile(actorId: string) {
-    return this.request<ActorProfile>(`/profiles/actor/${actorId}`);
+    const res = await this.request<any>(`/profiles/actor/${actorId}`);
+    const profile = res.data?.profile || res.data;
+    return { ...res, data: profile as ActorProfile };
+  }
+
+  async getCasterProfile(casterId: string) {
+    const res = await this.request<any>(`/profiles/caster/${casterId}`);
+    const profile = res.data?.profile || res.data;
+    return { ...res, data: profile as CasterProfile };
   }
 
   async updateActorProfile(data: Partial<ActorProfile>) {
-    return this.request<ActorProfile>("/profiles/actor", {
+    return this.request<ActorProfile>("/profiles/actor/me", {
       method: "PUT",
       body: JSON.stringify(data)
     });
   }
 
+  async getMyExperiences() {
+    const res = await this.request<any>("/profiles/actor/me/experiences");
+    const list = Array.isArray(res.data)
+      ? res.data
+      : Array.isArray(res.data?.experiences)
+      ? res.data.experiences
+      : [];
+    return { ...res, data: list };
+  }
+
+  async addExperience(data: {
+    roleTitle: string;
+    organization?: string;
+    description?: string;
+    startDate?: string;
+    endDate?: string;
+    isCurrent?: boolean;
+  }) {
+    return this.request<any>("/profiles/actor/me/experiences", {
+      method: "POST",
+      body: JSON.stringify(data)
+    });
+  }
+
+  async deleteExperience(experienceId: string) {
+    return this.request(`/profiles/actor/me/experiences/${experienceId}`, {
+      method: "DELETE"
+    });
+  }
+
   async updateCasterProfile(data: Partial<CasterProfile>) {
-    return this.request<CasterProfile>("/profiles/caster", {
+    return this.request<CasterProfile>("/profiles/caster/me", {
       method: "PUT",
       body: JSON.stringify(data)
     });
@@ -181,7 +247,22 @@ class ApiClient {
     return { ...res, data: project as Project };
   }
 
-  async createProject(data: Omit<Partial<Project>, "roles"> & { roles?: Array<Partial<Role>> }) {
+  async createProject(data: {
+    title: string;
+    description: string;
+    projectType: string;
+    location: string;
+    startDate?: string;
+    endDate?: string;
+    applicationDeadline?: string;
+    roles?: Array<{
+      title: string;
+      description: string;
+      genderRequirement?: string;
+      minAge?: number;
+      maxAge?: number;
+    }>;
+  }) {
     return this.request<Project>("/projects", {
       method: "POST",
       body: JSON.stringify(data)
@@ -195,22 +276,62 @@ class ApiClient {
     });
   }
 
+  async publishProject(id: string) {
+    return this.request<{ project: Project; message?: string }>(`/projects/${id}/publish`, {
+      method: "POST"
+    });
+  }
+
+  async closeProject(id: string) {
+    return this.request<{ project: Project; message?: string }>(`/projects/${id}/close`, {
+      method: "POST"
+    });
+  }
+
+  async addCastingRole(projectId: string, data: {
+    title: string;
+    description: string;
+    genderRequirement?: string;
+    minAge?: number;
+    maxAge?: number;
+  }) {
+    return this.request<Role>(`/projects/${projectId}/roles`, {
+      method: "POST",
+      body: JSON.stringify(data)
+    });
+  }
+
+  async updateCastingRole(projectId: string, roleId: string, data: Partial<Role> & { status?: string }) {
+    return this.request<Role>(`/projects/${projectId}/roles/${roleId}`, {
+      method: "PUT",
+      body: JSON.stringify(data)
+    });
+  }
+
   async searchRoles(params?: {
+    q?: string;
     keyword?: string;
     roleType?: string;
     projectType?: string;
     unionStatus?: string;
+    genderRequirement?: string;
+    age?: number;
     ageMin?: number;
     ageMax?: number;
     location?: string;
   }) {
     const searchParams = new URLSearchParams();
     if (params) {
-      Object.entries(params).forEach(([key, val]) => {
-        if (val !== undefined && val !== null && val !== "") {
-          searchParams.append(key, String(val));
-        }
-      });
+      const qVal = params.q || params.keyword;
+      if (qVal) searchParams.append("q", qVal);
+      if (params.projectType) searchParams.append("projectType", params.projectType);
+      if (params.roleType) searchParams.append("roleType", params.roleType);
+      if (params.unionStatus) searchParams.append("unionStatus", params.unionStatus);
+      if (params.genderRequirement) searchParams.append("genderRequirement", params.genderRequirement);
+      if (params.age !== undefined) searchParams.append("age", String(params.age));
+      if (params.ageMin !== undefined) searchParams.append("minAge", String(params.ageMin));
+      if (params.ageMax !== undefined) searchParams.append("maxAge", String(params.ageMax));
+      if (params.location) searchParams.append("location", params.location);
     }
     const res = await this.request<any>(`/search/roles${searchParams.toString() ? `?${searchParams.toString()}` : ""}`);
     const list = Array.isArray(res.data)
@@ -219,6 +340,60 @@ class ApiClient {
       ? res.data.roles
       : [];
     return { ...res, data: list as Role[] };
+  }
+
+  async searchActors(params?: {
+    q?: string;
+    skills?: string[];
+    gender?: string;
+    minAge?: number;
+    maxAge?: number;
+    hasExperience?: boolean;
+    experienceKeyword?: string;
+  }) {
+    const searchParams = new URLSearchParams();
+    if (params) {
+      if (params.q) searchParams.append("q", params.q);
+      if (params.skills && params.skills.length > 0) searchParams.append("skills", params.skills.join(","));
+      if (params.gender) searchParams.append("gender", params.gender);
+      if (params.minAge !== undefined) searchParams.append("minAge", String(params.minAge));
+      if (params.maxAge !== undefined) searchParams.append("maxAge", String(params.maxAge));
+      if (params.hasExperience !== undefined) searchParams.append("hasExperience", String(params.hasExperience));
+      if (params.experienceKeyword) searchParams.append("experienceKeyword", params.experienceKeyword);
+    }
+    const res = await this.request<any>(`/search/actors${searchParams.toString() ? `?${searchParams.toString()}` : ""}`);
+    const list = Array.isArray(res.data)
+      ? res.data
+      : Array.isArray(res.data?.actors)
+      ? res.data.actors
+      : [];
+    return { ...res, data: list as ActorProfile[] };
+  }
+
+  async searchProjects(params?: {
+    q?: string;
+    projectType?: string;
+    location?: string;
+    hasOpenRoles?: boolean;
+  }) {
+    const searchParams = new URLSearchParams();
+    if (params) {
+      if (params.q) searchParams.append("q", params.q);
+      if (params.projectType) searchParams.append("projectType", params.projectType);
+      if (params.location) searchParams.append("location", params.location);
+      if (params.hasOpenRoles !== undefined) searchParams.append("hasOpenRoles", String(params.hasOpenRoles));
+    }
+    const res = await this.request<any>(`/search/projects${searchParams.toString() ? `?${searchParams.toString()}` : ""}`);
+    const list = Array.isArray(res.data)
+      ? res.data
+      : Array.isArray(res.data?.projects)
+      ? res.data.projects
+      : [];
+    return { ...res, data: list as Project[] };
+  }
+
+  async getSearchFilters() {
+    return this.request<{ skills: string[]; genders: string[]; projectTypes: string[] }>("/search/filters");
   }
 
   async getRoleById(roleId: string) {
@@ -231,7 +406,12 @@ class ApiClient {
   async applyToRole(roleId: string, notes?: string, auditionTapeUrl?: string) {
     return this.request<Application>("/applications", {
       method: "POST",
-      body: JSON.stringify({ roleId, notes, auditionTapeUrl })
+      body: JSON.stringify({
+        castingRoleId: roleId,
+        roleId,
+        notes,
+        auditionTapeUrl
+      })
     });
   }
 
@@ -255,6 +435,21 @@ class ApiClient {
     return { ...res, data: list as Application[] };
   }
 
+  async getCasterRoleApplications(roleId: string, params?: { status?: string; page?: number; limit?: number }) {
+    const query = new URLSearchParams();
+    if (params?.status) query.append("status", params.status);
+    if (params?.page) query.append("page", String(params.page));
+    if (params?.limit) query.append("limit", String(params.limit));
+    const qs = query.toString() ? `?${query.toString()}` : "";
+    const res = await this.request<any>(`/applications/role/${roleId}${qs}`);
+    const list = Array.isArray(res.data)
+      ? res.data
+      : Array.isArray(res.data?.applications)
+      ? res.data.applications
+      : [];
+    return { ...res, data: list as Application[] };
+  }
+
   async updateApplicationStatus(id: string, status: string, notes?: string) {
     return this.request<Application>(`/applications/${id}/status`, {
       method: "PATCH",
@@ -263,10 +458,13 @@ class ApiClient {
   }
 
   // --- Casting Requests ---
-  async sendCastingRequest(data: { roleId: string; actorId: string; message?: string }) {
+  async sendCastingRequest(data: { roleId?: string; castingRoleId?: string; actorId: string; message?: string }) {
     return this.request<CastingRequest>("/casting-requests", {
       method: "POST",
-      body: JSON.stringify(data)
+      body: JSON.stringify({
+        actorId: data.actorId,
+        castingRoleId: data.castingRoleId || data.roleId
+      })
     });
   }
 
@@ -282,10 +480,11 @@ class ApiClient {
     return { ...res, data: list as CastingRequest[] };
   }
 
-  async respondToCastingRequest(id: string, status: "ACCEPTED" | "DECLINED") {
+  async respondToCastingRequest(id: string, status: "ACCEPTED" | "DECLINED" | "REJECTED") {
+    const normalizedStatus = status === "DECLINED" ? "REJECTED" : status;
     return this.request<CastingRequest>(`/casting-requests/${id}/respond`, {
       method: "PATCH",
-      body: JSON.stringify({ status })
+      body: JSON.stringify({ status: normalizedStatus })
     });
   }
 
@@ -318,16 +517,86 @@ class ApiClient {
     });
   }
 
+  // --- Notifications ---
+  async getNotifications(page = 1, limit = 20) {
+    const res = await this.request<any>(`/notifications?page=${page}&limit=${limit}`);
+    const list = Array.isArray(res.data)
+      ? res.data
+      : Array.isArray(res.data?.notifications)
+      ? res.data.notifications
+      : [];
+    return { ...res, data: list };
+  }
+
+  async getUnreadNotificationCount() {
+    return this.request<{ unreadCount: number }>("/notifications/unread-count");
+  }
+
+  async markNotificationAsRead(notificationId: string) {
+    return this.request<any>(`/notifications/${notificationId}/read`, {
+      method: "PATCH"
+    });
+  }
+
+  async markAllNotificationsAsRead() {
+    return this.request<any>("/notifications/mark-all-read", {
+      method: "PATCH"
+    });
+  }
+
   // --- Subscriptions & Payments ---
   async getSubscriptionPlans() {
     return this.request<any>("/subscriptions/plans");
   }
 
-  async createCheckoutSession(planId: string, billingCycle: "monthly" | "yearly") {
-    return this.request<{ checkoutUrl?: string; sessionId?: string }>("/subscriptions/checkout-session", {
+  async getCurrentSubscription() {
+    return this.request<{
+      isPremium: boolean;
+      role: string;
+      planType: string | null;
+      status: string;
+      startDate: string | null;
+      endDate: string | null;
+      autoRenew: boolean;
+      daysRemaining: number;
+    }>("/subscriptions/current");
+  }
+
+  async createCheckout(planType: "ACTOR_PREMIUM" | "CASTER_PREMIUM") {
+    return this.request<{
+      orderId: string;
+      amount: number;
+      currency: string;
+      planType: string;
+      planName: string;
+      durationDays: number;
+      keyId: string;
+    }>("/subscriptions/checkout", {
       method: "POST",
-      body: JSON.stringify({ planId, billingCycle })
+      body: JSON.stringify({ planType })
     });
+  }
+
+  async verifyPayment(data: { orderId: string; paymentId: string; signature: string }) {
+    return this.request<any>("/subscriptions/verify", {
+      method: "POST",
+      body: JSON.stringify(data)
+    });
+  }
+
+  async cancelSubscription() {
+    return this.request<{ message: string; cancelledSubscription: any }>("/subscriptions/cancel", {
+      method: "POST"
+    });
+  }
+
+  async getBillingHistory(page = 1, limit = 20) {
+    return this.request<any>(`/subscriptions/history?page=${page}&limit=${limit}`);
+  }
+
+  async createCheckoutSession(planId: string) {
+    const planType = planId.toLowerCase().includes("caster") ? "CASTER_PREMIUM" : "ACTOR_PREMIUM";
+    return this.createCheckout(planType);
   }
 
   // --- Reports & Moderation ---
@@ -358,23 +627,47 @@ class ApiClient {
     return this.request<any>("/admin/dashboard/stats", {}, true);
   }
 
-  async getAdminReports(status?: string) {
-    const query = status ? `?status=${status}` : "";
-    return this.request<ModerationReport[]>(`/admin/reports${query}`, {}, true);
+  async getAdminReports(params?: { status?: string; targetType?: string; page?: number; limit?: number }) {
+    const query = new URLSearchParams();
+    if (params?.status) query.append("status", params.status);
+    if (params?.targetType) query.append("targetType", params.targetType);
+    if (params?.page) query.append("page", String(params.page));
+    if (params?.limit) query.append("limit", String(params.limit));
+    const qs = query.toString() ? `?${query.toString()}` : "";
+    const res = await this.request<any>(`/admin/reports${qs}`, {}, true);
+    const list = Array.isArray(res.data)
+      ? res.data
+      : Array.isArray(res.data?.reports)
+      ? res.data.reports
+      : [];
+    return { ...res, data: list as ModerationReport[] };
   }
 
-  async resolveReport(id: string, resolution: "RESOLVED" | "DISMISSED", resolutionNotes?: string) {
-    return this.request<ModerationReport>(`/admin/reports/${id}/resolve`, {
+  async getAdminReportById(id: string) {
+    return this.request<any>(`/admin/reports/${id}`, {}, true);
+  }
+
+  async updateReportStatus(id: string, status: "UNDER_REVIEW" | "RESOLVED" | "DISMISSED", resolutionNote?: string) {
+    return this.request<any>(`/admin/reports/${id}/status`, {
       method: "PATCH",
-      body: JSON.stringify({ resolution, resolutionNotes })
+      body: JSON.stringify({ status, resolutionNote })
     }, true);
+  }
+
+  async moderateUser(userId: string, isActive: boolean, reason: string) {
+    return this.request<any>(`/admin/users/${userId}/moderation`, {
+      method: "PATCH",
+      body: JSON.stringify({ isActive, reason })
+    }, true);
+  }
+
+  // Backwards compatibility aliases
+  async resolveReport(id: string, resolution: "RESOLVED" | "DISMISSED", resolutionNotes?: string) {
+    return this.updateReportStatus(id, resolution, resolutionNotes);
   }
 
   async toggleUserSuspension(userId: string, isSuspended: boolean, reason?: string) {
-    return this.request<{ user: User }>(`/admin/users/${userId}/suspend`, {
-      method: "PATCH",
-      body: JSON.stringify({ isSuspended, reason })
-    }, true);
+    return this.moderateUser(userId, !isSuspended, reason || "Administrative conduct policy enforcement");
   }
 }
 

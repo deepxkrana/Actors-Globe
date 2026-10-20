@@ -10,22 +10,22 @@ export const Discovery: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProjectType, setSelectedProjectType] = useState<string>("");
-  const [selectedRoleType, setSelectedRoleType] = useState<string>("");
-  const [selectedUnion, setSelectedUnion] = useState<string>("");
+  const [selectedGender, setSelectedGender] = useState<string>("");
 
   const fetchRoles = async () => {
     setLoading(true);
     try {
       const res = await api.searchRoles({
-        keyword: searchQuery || undefined,
+        q: searchQuery || undefined,
         projectType: selectedProjectType || undefined,
-        roleType: selectedRoleType || undefined,
-        unionStatus: selectedUnion || undefined
+        genderRequirement: selectedGender || undefined
       });
       if (res && res.success && res.data) {
         const rawData = res.data as any;
         const roleItems = Array.isArray(rawData)
           ? rawData
+          : Array.isArray(rawData.roles)
+          ? rawData.roles
           : Array.isArray(rawData.items)
           ? rawData.items
           : [];
@@ -43,7 +43,7 @@ export const Discovery: React.FC = () => {
 
   useEffect(() => {
     fetchRoles();
-  }, [selectedProjectType, selectedRoleType, selectedUnion]);
+  }, [selectedProjectType, selectedGender]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -77,9 +77,10 @@ export const Discovery: React.FC = () => {
             <Search className="w-5 h-5 text-[#8A8A90] absolute left-4 top-3.5" />
             <input
               type="text"
+              aria-label="Search casting roles and notices"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by character name, project title, or keywords..."
+              placeholder="Search by character name, synopsis, or keywords..."
               className="w-full h-12 pl-12 pr-28 rounded-full bg-black/40 input-editorial text-sm"
             />
             <button
@@ -98,6 +99,7 @@ export const Discovery: React.FC = () => {
 
             {/* Project Type Filter */}
             <select
+              aria-label="Filter roles by production type"
               value={selectedProjectType}
               onChange={(e) => setSelectedProjectType(e.target.value)}
               className="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/15 text-white focus:outline-none cursor-pointer"
@@ -105,41 +107,33 @@ export const Discovery: React.FC = () => {
               <option value="" className="bg-[#111]">All Project Types</option>
               <option value="FEATURE_FILM" className="bg-[#111]">Feature Film</option>
               <option value="SHORT_FILM" className="bg-[#111]">Short Film</option>
-              <option value="COMMERCIAL" className="bg-[#111]">Commercial</option>
+              <option value="TV_SERIES" className="bg-[#111]">TV Series</option>
+              <option value="WEB_SERIES" className="bg-[#111]">Web Series</option>
+              <option value="ADVERTISEMENT" className="bg-[#111]">Commercial / Ad</option>
               <option value="THEATRE" className="bg-[#111]">Theatre</option>
-              <option value="SERIES" className="bg-[#111]">Series</option>
+              <option value="MUSIC_VIDEO" className="bg-[#111]">Music Video</option>
+              <option value="OTHER" className="bg-[#111]">Other</option>
             </select>
 
-            {/* Role Type Filter */}
+            {/* Gender Requirement Filter */}
             <select
-              value={selectedRoleType}
-              onChange={(e) => setSelectedRoleType(e.target.value)}
+              aria-label="Filter roles by performer gender requirement"
+              value={selectedGender}
+              onChange={(e) => setSelectedGender(e.target.value)}
               className="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/15 text-white focus:outline-none cursor-pointer"
             >
-              <option value="" className="bg-[#111]">All Role Types</option>
-              <option value="LEAD" className="bg-[#111]">Lead</option>
-              <option value="SUPPORTING" className="bg-[#111]">Supporting</option>
-              <option value="FEATURED" className="bg-[#111]">Featured</option>
-              <option value="EXTRA" className="bg-[#111]">Extra</option>
+              <option value="" className="bg-[#111]">Any Gender Requirement</option>
+              <option value="MALE" className="bg-[#111]">Male</option>
+              <option value="FEMALE" className="bg-[#111]">Female</option>
+              <option value="NON_BINARY" className="bg-[#111]">Non-Binary</option>
+              <option value="ANY" className="bg-[#111]">Open to Any</option>
             </select>
 
-            {/* Union Status Filter */}
-            <select
-              value={selectedUnion}
-              onChange={(e) => setSelectedUnion(e.target.value)}
-              className="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/15 text-white focus:outline-none cursor-pointer"
-            >
-              <option value="" className="bg-[#111]">Any Union Status</option>
-              <option value="SAG_AFTRA" className="bg-[#111]">SAG-AFTRA</option>
-              <option value="NON_UNION" className="bg-[#111]">Non-Union</option>
-            </select>
-
-            {(selectedProjectType || selectedRoleType || selectedUnion || searchQuery) && (
+            {(selectedProjectType || selectedGender || searchQuery) && (
               <button
                 onClick={() => {
                   setSelectedProjectType("");
-                  setSelectedRoleType("");
-                  setSelectedUnion("");
+                  setSelectedGender("");
                   setSearchQuery("");
                 }}
                 className="px-3 py-1.5 rounded-full text-xs text-[#FF97CA] hover:underline"

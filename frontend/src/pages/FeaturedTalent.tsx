@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Headline } from "../components/Headline";
 import { FEATURED_ARTISTS, MARQUEE_TILES } from "../data/mockContent";
 import { ChevronLeft, ChevronRight, Globe } from "lucide-react";
@@ -113,6 +114,14 @@ export const FeaturedTalent: React.FC = () => {
                       <span className="text-[#8A8A90]">Following</span>
                     </div>
                   </div>
+
+                  <Link
+                    to={`/talent/${artist.id}`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="mt-4 py-2 px-4 rounded-full border border-white/15 bg-white/5 text-center text-xs font-medium text-white hover:bg-[#F7FFB8] hover:text-black hover:border-[#F7FFB8] transition-all flex items-center justify-center gap-1.5"
+                  >
+                    <span>View Monograph</span>
+                  </Link>
                 </div>
               );
             })}

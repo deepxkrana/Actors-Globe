@@ -3,9 +3,12 @@ export type UserRole = "ACTOR" | "CASTER" | "ADMIN";
 export interface User {
   id: string;
   email: string;
+  phone?: string;
   name?: string;
   role: UserRole;
-  isVerified: boolean;
+  isVerified?: boolean;
+  emailVerified?: boolean;
+  phoneVerified?: boolean;
   avatarUrl?: string;
   createdAt: string;
 }
@@ -13,7 +16,10 @@ export interface User {
 export interface ActorProfile {
   id: string;
   userId: string;
+  displayName?: string;
   stageName?: string;
+  age?: number;
+  gender?: string;
   bio?: string;
   headshotUrl?: string;
   additionalPhotos?: string[];
@@ -32,16 +38,38 @@ export interface ActorProfile {
     year: number;
   }>;
   skills?: string[];
+  experiences?: Array<{
+    id: string;
+    roleTitle: string;
+    organization: string;
+    description?: string;
+    startDate?: string | Date;
+    endDate?: string | Date;
+    isCurrent?: boolean;
+  }>;
+  user?: {
+    id?: string;
+    name: string;
+    email: string;
+    avatarUrl?: string;
+  };
 }
 
 export interface CasterProfile {
   id: string;
   userId: string;
+  displayName?: string;
   companyName?: string;
   bio?: string;
   website?: string;
   isVerified: boolean;
   phone?: string;
+  user?: {
+    id?: string;
+    name: string;
+    email: string;
+    avatarUrl?: string;
+  };
 }
 
 export type ProjectType = "FEATURE_FILM" | "SHORT_FILM" | "COMMERCIAL" | "THEATRE" | "VOICEOVER" | "SERIES";
@@ -175,17 +203,28 @@ export interface SubscriptionPlan {
 export interface ModerationReport {
   id: string;
   reporterId: string;
-  targetType: "USER" | "PROJECT" | "APPLICATION" | "MESSAGE";
+  targetType: "USER" | "PROFILE" | "PROJECT" | "CASTING_ROLE" | "MEDIA" | "MESSAGE" | string;
   targetId: string;
+  reportedUserId?: string;
   reason: string;
   details?: string;
-  status: "PENDING" | "INVESTIGATING" | "RESOLVED" | "DISMISSED";
+  status: "PENDING" | "UNDER_REVIEW" | "INVESTIGATING" | "RESOLVED" | "DISMISSED" | string;
+  resolutionNote?: string;
   resolutionNotes?: string;
   createdAt: string;
   updatedAt: string;
   reporter?: {
+    id?: string;
     name: string;
     email: string;
+    role?: string;
+  };
+  reportedUser?: {
+    id?: string;
+    name: string;
+    email: string;
+    role?: string;
+    isActive?: boolean;
   };
   targetDetails?: any;
 }

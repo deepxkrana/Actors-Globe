@@ -131,8 +131,14 @@ export const RoleDetail: React.FC = () => {
             </h1>
 
             {role.project && (
-              <div className="text-lg text-[#B9B9BE] mt-2 font-medium">
-                Production: <span className="text-white">{role.project.title}</span> ({role.project.projectType})
+              <div className="text-lg text-[#B9B9BE] mt-2 font-medium flex flex-wrap items-center gap-2">
+                <span>Production: <strong className="text-white">{role.project.title}</strong> ({role.project.projectType})</span>
+                <Link
+                  to={`/casters/${role.project.casterId || "caster-studio-1"}`}
+                  className="text-xs text-[#F7FFB8] hover:underline ml-1"
+                >
+                  • View Casting Studio
+                </Link>
               </div>
             )}
           </div>

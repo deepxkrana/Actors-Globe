@@ -197,3 +197,92 @@ body {
   border-color: #DBAAF4;
   box-shadow: 0 0 0 1px #DBAAF4;
 }
+
+.input-editorial-danger {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input-editorial-danger::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+.input-editorial-danger:focus {
+  border-color: #f87171;
+  box-shadow: 0 0 0 1px #f87171;
+}
+
+/* =========================================================================
+   ACCESSIBILITY & RESPONSIVE POLISH (PHASE 9)
+   ========================================================================= */
+
+/* Keyboard Navigation Focus Rings */
+:focus-visible {
+  outline: 2px solid #F7FFB8;
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #F7FFB8;
+  outline-offset: 2px;
+}
+
+/* Screen Reader Utilities */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.focus\:not-sr-only:focus {
+  position: fixed;
+  width: auto;
+  height: auto;
+  padding: 0.75rem 1.25rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  z-index: 100;
+}
+
+/* Accessible Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .rotating-badge {
+    animation: none !important;
+  }
+}
+
+/* Custom Editorial Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #070707;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.32);
+}

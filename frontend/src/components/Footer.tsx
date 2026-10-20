@@ -100,7 +100,13 @@ export const Footer: React.FC = () => {
     { label: "Featured Talent", path: "/talent" },
     { label: "Reviews", path: "/reviews" },
     { label: "Our Blog", path: "/blog" },
-    { label: "Casting Discovery", path: "/discovery" }
+    { label: "Casting Discovery", path: "/discovery" },
+    { label: "Pricing", path: "/pricing" },
+    { label: "Contact", path: "/contact" },
+    { label: "Help & FAQ", path: "/help" },
+    { label: "Privacy Policy", path: "/privacy" },
+    { label: "Terms", path: "/terms" },
+    { label: "Guidelines", path: "/guidelines" }
   ];
 
   return (
@@ -197,9 +203,14 @@ export const Footer: React.FC = () => {
             </div>
 
             <form onSubmit={handleSubscribe} className="relative w-full">
+              <label htmlFor="newsletter-email" className="sr-only">
+                Email address for newsletter
+              </label>
               <input
+                id="newsletter-email"
                 type="email"
                 required
+                autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={subscribed ? "Thank you for subscribing!" : "Your email"}
@@ -209,7 +220,7 @@ export const Footer: React.FC = () => {
               <button
                 type="submit"
                 className="absolute right-1.5 top-1.5 w-9 h-9 rounded-full bg-white text-black flex items-center justify-center hover:bg-[#F7FFB8] transition-colors cursor-pointer"
-                aria-label="Subscribe"
+                aria-label="Subscribe to newsletter"
               >
                 {subscribed ? <Check className="w-4 h-4 text-emerald-600" /> : <ArrowRight className="w-4 h-4" />}
               </button>
@@ -217,7 +228,7 @@ export const Footer: React.FC = () => {
 
             <p className="text-[11px] text-[#8A8A90] mt-2">
               By subscribing, you accept our{" "}
-              <Link to="/about" className="underline hover:text-white transition-colors">
+              <Link to="/privacy" className="underline hover:text-white transition-colors">
                 Privacy Policy
               </Link>
             </p>

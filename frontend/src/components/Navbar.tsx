@@ -3,6 +3,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { Menu, X, LogOut, LayoutDashboard, Sparkles } from "lucide-react";
 
+import { NotificationBell } from "./NotificationBell";
+
 export const Navbar: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -62,6 +64,8 @@ export const Navbar: React.FC = () => {
         <div className="hidden md:flex items-center gap-3">
           {user ? (
             <div className="flex items-center gap-3">
+              <NotificationBell />
+
               <Link
                 to="/dashboard"
                 className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/6 border border-white/15 hover:bg-white/10 text-sm font-medium text-white transition-colors"
@@ -104,19 +108,31 @@ export const Navbar: React.FC = () => {
           )}
         </div>
 
-        {/* Mobile Hamburger Button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden w-10 h-10 rounded-full flex items-center justify-center bg-white/6 border border-white/15 text-white cursor-pointer"
-          aria-label="Toggle menu"
-        >
-          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+        {/* Mobile Right Controls */}
+        <div className="flex lg:hidden items-center gap-2">
+          {user && <NotificationBell />}
+
+          {/* Mobile Hamburger Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="w-10 h-10 rounded-full flex items-center justify-center bg-white/6 border border-white/15 text-white cursor-pointer"
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation-drawer"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Drawer Overlay */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-18 bg-[#050505]/95 backdrop-blur-2xl z-40 p-6 flex flex-col justify-between border-t border-white/10 animate-in fade-in duration-200">
+        <div
+          id="mobile-navigation-drawer"
+          role="dialog"
+          aria-label="Mobile Navigation"
+          className="lg:hidden fixed inset-0 top-18 bg-[#050505]/95 backdrop-blur-2xl z-40 p-6 flex flex-col justify-between border-t border-white/10 animate-in fade-in duration-200"
+        >
           <div className="flex flex-col gap-2">
             {navLinks.map((link) => (
               <Link

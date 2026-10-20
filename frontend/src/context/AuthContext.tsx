@@ -7,7 +7,7 @@ interface AuthContextType {
   token: string | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
-  register: (data: { email: string; password: string; name: string; role: "ACTOR" | "CASTER" }) => Promise<{ success: boolean; error?: string }>;
+  register: (data: { email: string; password: string; name: string; phone?: string; role: "ACTOR" | "CASTER" }) => Promise<{ success: boolean; error?: string }>;
   logout: () => void;
   refreshUser: () => Promise<void>;
   isActor: boolean;
@@ -64,7 +64,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     return { success: false, error: res.error || "Login failed" };
   };
 
-  const register = async (data: { email: string; password: string; name: string; role: "ACTOR" | "CASTER" }) => {
+  const register = async (data: { email: string; password: string; name: string; phone?: string; role: "ACTOR" | "CASTER" }) => {
     const res = await api.register(data);
     if (res.success && res.data) {
       setUser(res.data.user);
