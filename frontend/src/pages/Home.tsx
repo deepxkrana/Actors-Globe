@@ -7,12 +7,10 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
-  ArrowUpRight,
   Award,
   Users,
   Layers,
   Zap,
-  Smartphone,
   Globe
 } from "lucide-react";
 import { TwitterIcon, InstagramIcon, FacebookIcon } from "../components/SocialIcons";
@@ -64,26 +62,26 @@ export const Home: React.FC = () => {
     {
       id: "fact-1",
       icon: Users,
-      title: "Members part of people",
-      body: "No more empty 'hey' messages. On ActorsGlobe, chats start with shared interests - cinematic influences, character motivations, or the little artistic nuances that define you."
+      title: "A Community of Creators",
+      body: "Every great production begins with people. Discover talent, connect with industry professionals, and build relationships around a shared passion for storytelling."
     },
     {
       id: "fact-2",
       icon: Award,
-      title: "A lot of awards",
-      body: "Over 85 festival-recognized independent films and commercial productions cast their lead talent through ActorsGlobe verified monographs."
+      title: "Opportunities That Matter",
+      body: "Explore casting calls, discover suitable roles, and bring your talent to projects that align with your ambitions."
     },
     {
       id: "fact-3",
       icon: Layers,
-      title: "5M+ Creative Works Published",
-      body: "Actors, voice performers, and directors have shared over five million media assets, audition reels, and monologues across 140 countries."
+      title: "Portfolios That Speak",
+      body: "Showcase your headshots, showreels, skills, and experience in one place, giving casting professionals a clearer picture of your potential."
     },
     {
       id: "fact-4",
       icon: Zap,
-      title: "Featured by Industry Leaders",
-      body: "Praised by Variety, The Hollywood Reporter, and top European casting guilds as the premier digital sanctuary for authentic performance craft."
+      title: "Built Around Your Craft",
+      body: "Whether you're stepping into your first audition or casting your next production, ActorsGlobe helps bring the right people and possibilities together."
     }
   ];
 
@@ -118,26 +116,6 @@ export const Home: React.FC = () => {
             <div className="px-4 py-1.5 rounded-full glass text-xs md:text-sm font-medium tracking-wide text-white/90 border border-white/20">
               {slide.tag}
             </div>
-
-            {/* Author Card (Top-Right on Desktop) */}
-            <div className="hidden sm:flex items-center gap-3.5 p-2 pr-4 rounded-3xl glass border border-white/15 max-w-xs animate-in fade-in duration-500">
-              <img
-                src={slide.authorAvatar}
-                alt={slide.authorName}
-                className="w-12 h-12 rounded-2xl object-cover border border-white/20"
-              />
-              <div className="flex flex-col">
-                <span className="text-sm font-semibold text-white leading-tight">
-                  {slide.authorName}
-                </span>
-                <span className="text-xs text-[#D7D7DB] opacity-75">
-                  {slide.authorRole}
-                </span>
-              </div>
-              <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white ml-2">
-                <ArrowUpRight className="w-4 h-4" />
-              </div>
-            </div>
           </div>
 
           {/* Bottom Hero Layout: Left Editorial Copy & Right 3D Refractive Glass Orb CTA */}
@@ -152,20 +130,6 @@ export const Home: React.FC = () => {
               <p className="text-base sm:text-lg text-white/85 font-normal max-w-lg leading-relaxed">
                 {slide.subtitle}
               </p>
-
-              {/* Mobile Author Card Row */}
-              <div className="sm:hidden flex items-center gap-3 p-2.5 rounded-2xl glass mt-2 border border-white/15">
-                <img
-                  src={slide.authorAvatar}
-                  alt={slide.authorName}
-                  className="w-10 h-10 rounded-xl object-cover"
-                />
-                <div className="flex flex-col flex-1">
-                  <span className="text-sm font-semibold text-white">{slide.authorName}</span>
-                  <span className="text-xs text-[#D7D7DB]">{slide.authorRole}</span>
-                </div>
-                <ArrowUpRight className="w-4 h-4 text-white" />
-              </div>
             </div>
 
             {/* Right: Liquid Glass Lens Button + Slide Indicator Capsules */}
@@ -227,7 +191,7 @@ export const Home: React.FC = () => {
           {/* Right: Indented Statement & Social Action Row */}
           <div className="lg:col-span-7 flex flex-col gap-8">
             <Headline
-              text="We connect actors, filmmakers and visual artists *worldwide to share their vision*, grow their craft, and collaborate on projects."
+              text="We connect actors, casters and filmmakers *worldwide to share their vision*, grow their craft, and collaborate on projects."
               as="p"
               accentColor="dune"
               className="text-2xl sm:text-3xl md:text-4xl font-normal leading-[1.3] text-white lg:indent-24"
@@ -278,17 +242,17 @@ export const Home: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          SECTION C: (02) OUR EXPERIENCE CAROUSEL
+          SECTION C: (02) THE ART OF CASTING
          ========================================================================= */}
       <section className="px-4 md:px-7">
         <div className="rounded-4xl bg-[#0D0D0E] border border-white/10 p-6 md:p-10 relative overflow-hidden">
           <div className="flex flex-col lg:flex-row justify-between items-start gap-8 mb-8">
             <div>
               <span className="text-xs md:text-sm font-medium tracking-wider text-[#8A8A90] uppercase">
-                (02) Our Experience
+                (02) The Art of Casting
               </span>
               <Headline
-                text="When *moments* become stories, and *stories* shape reality"
+                text="Where *stories* find their faces, and *talent* finds its stage."
                 as="h2"
                 accentColor="muted"
                 className="text-2xl sm:text-3xl md:text-4xl font-normal text-white max-w-xl mt-2 tracking-tight"
@@ -297,7 +261,7 @@ export const Home: React.FC = () => {
 
             {/* Category Filter Tabs */}
             <div className="flex flex-wrap lg:flex-col gap-2 lg:gap-3 text-sm">
-              {["Feature Film", "Dramatic Series", "Commercial", "Auteur Shorts"].map((cat) => (
+              {["Feature Films", "Drama & Series", "Commercials", "Independent Films"].map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setExperienceCategory(cat)}
@@ -373,23 +337,23 @@ export const Home: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          SECTION D: (03) EDITOR'S PICKS EXPANDABLE BENTO
+          SECTION D: (03) THE TALENT SPOTLIGHT
          ========================================================================= */}
       <section className="px-4 md:px-7">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10">
           <div>
             <span className="text-xs md:text-sm font-medium tracking-wider text-[#8A8A90] uppercase">
-              (03) Editor's Picks
+              (03) THE TALENT SPOTLIGHT
             </span>
             <Headline
-              text="Curated *collections* from the ActorsGlobe *community*"
+              text="Meet the *talent* behind the stories worth *telling*."
               as="h2"
               accentColor="mauve"
               className="text-2xl sm:text-3xl md:text-4xl font-normal text-white max-w-xl mt-2 tracking-tight"
             />
           </div>
           <p className="text-sm md:text-base text-[#8A8A90] max-w-md leading-relaxed">
-            A carefully selected collection of modern performance, visual narratives, and artistic expression — curated to inspire new perspectives through culture and contemporary storytelling.
+            A curated showcase of distinctive faces, compelling personalities, and extraordinary potential. Discover the actors shaping tomorrow’s stories, one performance at a time.
           </p>
         </div>
 
@@ -448,7 +412,7 @@ export const Home: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          SECTION E: (04) FACTS & EMERALD STATS SQUIRCLE
+          SECTION E: (04) THE ACTORSGLOBE STORY
          ========================================================================= */}
       <section className="px-4 md:px-7">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
@@ -456,16 +420,16 @@ export const Home: React.FC = () => {
           <div className="lg:col-span-6 flex flex-col gap-6">
             <div>
               <span className="text-xs md:text-sm font-medium tracking-wider text-[#8A8A90] uppercase">
-                (04) Facts
+                (04) THE ACTORSGLOBE STORY
               </span>
               <Headline
-                text="Facts *about us*"
+                text="A platform built for the *art of connection*."
                 as="h2"
                 accentColor="muted"
                 className="text-3xl md:text-4xl font-normal text-white mt-1 mb-3"
               />
               <p className="text-lg text-white/90">
-                ActorsGlobe was born from a simple idea: every creator deserves a worthy stage.
+                ActorsGlobe brings actors, casting directors, and creators together to turn talent into opportunity and creative visions into compelling stories.
               </p>
             </div>
 
@@ -514,12 +478,12 @@ export const Home: React.FC = () => {
           <div className="lg:col-span-6 flex justify-center">
             <div className="w-full max-w-135 aspect-square rounded-[60px] md:rounded-[90px] emerald-stats-mesh p-8 md:p-12 relative flex items-center justify-center overflow-hidden">
               {/* Center Frosted Glass Circle */}
-              <div className="w-64 h-64 md:w-80 md:h-80 rounded-full glass border border-white/30 backdrop-blur-3xl flex flex-col items-center justify-center text-center shadow-2xl relative z-10">
-                <span className="text-5xl md:text-7xl font-bold tracking-tight text-white">
-                  50K+
+              <div className="w-72 h-72 md:w-84 md:h-84 rounded-full glass border border-white/30 backdrop-blur-3xl flex flex-col items-center justify-center text-center shadow-2xl relative z-10">
+                <span className="text-xl md:text-6xl font-bold tracking-tight text-white">
+                  One Community
                 </span>
                 <span className="text-lg md:text-xl text-[#F7FFB8] font-medium mt-1">
-                  Members
+                  Endless stories. Countless possibilities.
                 </span>
               </div>
 
@@ -542,10 +506,9 @@ export const Home: React.FC = () => {
           </div>
         </div>
       </section>
-
       {/* =========================================================================
-          SECTION F: APP DOWNLOAD CARD & 5-DEVICE SWEEPING ARC
-         ========================================================================= */}
+          SECTION F: APP DOWNLOAD CARD & 5-DEVICE SWEEPING ARC (DISABLED)
+         =========================================================================
       <section className="px-4 md:px-7">
         <div className="rounded-[40px] bg-linear-to-b from-[#151915] via-[#3E4A36] to-[#A9C185] p-8 md:p-16 border border-white/15 flex flex-col items-center text-center relative overflow-hidden">
           <Headline
@@ -558,7 +521,6 @@ export const Home: React.FC = () => {
             We empower visual creators and performers to share their stories and connect with the world.
           </p>
 
-          {/* Store Glass Pill Buttons */}
           <div className="flex flex-col sm:flex-row items-center gap-4 z-20 mb-12">
             <button className="px-6 py-3 rounded-full glass border border-white/20 hover:border-white/40 flex items-center gap-3 text-white transition-all">
               <Smartphone className="w-5 h-5 text-[#F7FFB8]" />
@@ -576,7 +538,6 @@ export const Home: React.FC = () => {
             </button>
           </div>
 
-          {/* 5-Device Arc Mockups Preview Display */}
           <div className="relative w-full max-w-4xl h-64 md:h-80 flex items-end justify-center gap-3 md:gap-5 overflow-hidden">
             {[
               { title: "Audition Reel", img: "https://images.unsplash.com/photo-1509281373149-e957c6296406?q=80&w=400" },
@@ -603,17 +564,18 @@ export const Home: React.FC = () => {
           </div>
         </div>
       </section>
-
+      */}
+      
       {/* =========================================================================
-          SECTION G: (05) WHY CHOOSE US? 2x2 BENTO GRID
+          SECTION G: (05) WHY ACTORSGLOBE? 2x2 BENTO GRID
          ========================================================================= */}
       <section className="px-4 md:px-7">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="text-xs md:text-sm font-medium tracking-wider text-[#8A8A90] uppercase">
-            (05) Why Choose Us?
+            (05) WHY ACTORSGLOBE?
           </span>
           <Headline
-            text="More than a *platform* a creative *movement*"
+            text="More than a *platform.* A place where talent meets *opportunity.*"
             as="h2"
             accentColor="muted"
             className="text-3xl md:text-5xl font-normal text-white mt-2 tracking-tight"
@@ -621,21 +583,21 @@ export const Home: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 max-w-5xl mx-auto">
-          {/* Card 1: Wide - No loss of quality */}
+          {/* Card 1: Wide - Your Talent, Uncompromised */}
           <div className="md:col-span-7 rounded-[28px] bg-[#0D0D0E] border border-white/10 p-7 flex flex-col justify-between min-h-80">
             <div className="h-40 rounded-2xl iridescent-border p-4 flex items-center justify-center relative overflow-hidden">
               <div className="w-32 h-24 rounded-lg bg-white/10 border border-white/20 shadow-xl -rotate-6 transform" />
               <div className="w-32 h-24 rounded-lg bg-white/20 border border-white/30 shadow-2xl rotate-6 transform absolute" />
             </div>
             <div>
-              <h4 className="text-xl font-medium text-white mb-1">No loss of quality</h4>
+              <h4 className="text-xl font-medium text-white mb-1">Your Talent, Uncompromised</h4>
               <p className="text-xs md:text-sm text-[#8A8A90] leading-relaxed">
-                Show your audition tapes and production portfolios the way you intended. No compression, no distortion - just pure cinematic clarity.
+                Show your audition tapes and production portfolios the way you intended. No compression, no distortion - just pure clarity.
               </p>
             </div>
           </div>
 
-          {/* Card 2: Narrow - Collaborations That Inspire */}
+          {/* Card 2: Narrow - Connections That Matter */}
           <div className="md:col-span-5 rounded-[28px] bg-[#0D0D0E] border border-white/10 p-7 flex flex-col justify-between min-h-80">
             <div className="h-40 flex items-center justify-center">
               <div className="flex -space-x-3">
@@ -650,14 +612,14 @@ export const Home: React.FC = () => {
               </div>
             </div>
             <div>
-              <h4 className="text-xl font-medium text-white mb-1">Collaborations That Inspire</h4>
+              <h4 className="text-xl font-medium text-white mb-1">Connections That Matter</h4>
               <p className="text-xs md:text-sm text-[#8A8A90] leading-relaxed">
-                Find co-stars and visionaries based on aesthetics, tone, and performance chemistry.
+                Connect with actors / casting directors, who share your passion for storytelling and bringing memorable characters to life.
               </p>
             </div>
           </div>
 
-          {/* Card 3: Narrow - Showcase That Sells */}
+          {/* Card 3: Narrow - A Portfolio That Speaks */}
           <div className="md:col-span-5 rounded-[28px] bg-[#0D0D0E] border border-white/10 p-7 flex flex-col justify-between min-h-80">
             <div className="h-40 grid grid-cols-3 gap-2 p-2">
               {[...Array(6)].map((_, i) => (
@@ -672,14 +634,14 @@ export const Home: React.FC = () => {
               ))}
             </div>
             <div>
-              <h4 className="text-xl font-medium text-white mb-1">Showcase That Sells</h4>
+              <h4 className="text-xl font-medium text-white mb-1">A Portfolio That Speaks</h4>
               <p className="text-xs md:text-sm text-[#8A8A90] leading-relaxed">
-                Your profile is an auteur monograph. Clean, stylish, and casting-room ready.
+                Present your talent, experience in a polished profile that makes your work easier to discover and evaluate.
               </p>
             </div>
           </div>
 
-          {/* Card 4: Wide - Smart Networking */}
+          {/* Card 4: Wide - Discover Your Next Role */}
           <div className="md:col-span-7 rounded-[28px] bg-[#0D0D0E] border border-white/10 p-7 flex flex-col justify-between min-h-80">
             <div className="h-40 flex items-center justify-center relative">
               <div className="w-32 h-32 rounded-full border border-dashed border-white/20 animate-spin [animation-duration:30s] flex items-center justify-center">
@@ -691,9 +653,9 @@ export const Home: React.FC = () => {
               </div>
             </div>
             <div>
-              <h4 className="text-xl font-medium text-white mb-1">Smart Networking</h4>
+              <h4 className="text-xl font-medium text-white mb-1">Discover Your Next Role</h4>
               <p className="text-xs md:text-sm text-[#8A8A90] leading-relaxed">
-                Our algorithm matches performers to roles that fit their exact physical specs and artistic range.
+                Explore casting calls, find roles that match your profile, and take the next step toward the stories you want to tell.
               </p>
             </div>
           </div>
@@ -713,7 +675,7 @@ export const Home: React.FC = () => {
           </div>
           {/* Orange Swirl Highlight Pill with Hand-Drawn Looping Arrow */}
           <div className="h-32 md:h-40 rounded-full manifesto-pill-orange flex items-center justify-center text-3xl md:text-5xl font-bold text-white shadow-xl relative overflow-hidden group">
-            <span className="relative z-10 text-3xl md:text-4xl font-bold">➿ ➔</span>
+            <span className="relative z-10 text-3xl md:text-4xl font-bold">♾️ ➔</span>
           </div>
           <div className="h-32 md:h-40 rounded-full bg-[#0D0D0E] border border-white/10 flex items-center justify-center text-3xl md:text-5xl font-medium text-white">
             Future

@@ -11,7 +11,7 @@ export const ContactBlock: React.FC = () => {
         {/* Left: Eyebrow + Rotating Circular Text Badge */}
         <div className="flex flex-col gap-6">
           <div className="text-sm font-medium tracking-wider text-[#8A8A90] uppercase">
-            (ag) Contact Us
+            (ag) GET IN TOUCH
           </div>
 
           <div className="relative w-36 h-36 flex items-center justify-center">
@@ -46,13 +46,13 @@ export const ContactBlock: React.FC = () => {
         {/* Right: Stacked Editorial CTA */}
         <div className="flex flex-col items-start md:items-end text-left md:text-right">
           <span className="text-xl md:text-2xl text-[#8A8A90] font-normal">
-            Let's start
+            Your next chapter starts here.
           </span>
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-normal text-white tracking-tight my-1">
-            Join the
+            Find Your
           </h2>
           <Headline
-            text="*Community*"
+            text="*Place in the Story.*"
             as="h2"
             accentColor="muted"
             className="text-5xl md:text-7xl lg:text-8xl font-normal tracking-tight -mt-2 mb-6"
@@ -63,7 +63,7 @@ export const ContactBlock: React.FC = () => {
             className="group flex items-center gap-3 text-lg md:text-xl font-medium text-white hover:text-[#F7FFB8] transition-colors"
           >
             <span className="underline underline-offset-4 decoration-white/30 group-hover:decoration-[#F7FFB8]">
-              Get in touch
+              Become a Member
             </span>
             <span className="w-11 h-11 rounded-full bg-white text-black flex items-center justify-center group-hover:scale-110 group-hover:bg-[#F7FFB8] transition-all shadow-md">
               <ArrowRight className="w-5 h-5" />
@@ -74,8 +74,8 @@ export const ContactBlock: React.FC = () => {
 
       {/* Sub-labels Row */}
       <div className="flex items-center justify-between text-xs text-[#8A8A90] pt-12 pb-4 border-b border-white/10">
-        <span>• Impactful Creative</span>
-        <span>• Global Casting Support</span>
+        <span>• Where Talent Meets Opportunity</span>
+        <span>• Your Story. Your Stage.</span>
       </div>
     </section>
   );
@@ -126,7 +126,7 @@ export const Footer: React.FC = () => {
               </span>
             </Link>
             <p className="text-sm text-[#B9B9BE] leading-relaxed">
-              We empower actors and casting directors to share their visions, discover transformative roles, and connect with the global entertainment stage.
+              Connecting actors, casting directors, and creators through a shared passion for storytelling. Discover talent, explore opportunities, and bring the next great story to life.
             </p>
           </div>
 

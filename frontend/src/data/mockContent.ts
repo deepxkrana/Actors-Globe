@@ -4,9 +4,6 @@ export interface HeroSlide {
   tag: string;
   headline: string;
   subtitle: string;
-  authorName: string;
-  authorRole: string;
-  authorAvatar: string;
 }
 
 export const HERO_SLIDES: HeroSlide[] = [
@@ -14,51 +11,36 @@ export const HERO_SLIDES: HeroSlide[] = [
     id: "slide-1",
     imageUrl: "https://images.unsplash.com/photo-1509281373149-e957c6296406?q=80&w=2000&auto=format&fit=crop",
     tag: "Visual Storytelling Reimagined",
-    headline: "Exploring the world's untold stories *through a creative lens*",
-    subtitle: "Every frame has a story — explore thousands of visual journeys from creators worldwide.",
-    authorName: "Joan Grover",
-    authorRole: "Photo author",
-    authorAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop"
+    headline: "Where every audition becomes *an indelible performance*.",
+    subtitle: "Built for actors, casting directors, and creators who value depth, craft, and the power of the right story."
   },
   {
     id: "slide-2",
     imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2000&auto=format&fit=crop",
     tag: "Auteur Casting Network",
-    headline: "When authentic talent meets *visionary direction*",
-    subtitle: "Connecting transformative performers with auteur filmmakers and premier production houses.",
-    authorName: "James Miller",
-    authorRole: "Lead Talent",
-    authorAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop"
+    headline: "Every great story begins with *the right face*.",
+    subtitle: "Connecting exceptional talent with the roles and creators that bring stories to life."
   },
   {
     id: "slide-3",
     imageUrl: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2000&auto=format&fit=crop",
     tag: "Digital Art Sanctuary",
-    headline: "Crafting modern cinema in *infinite horizons*",
-    subtitle: "A digital gallery where your audition reel and headshots stand as definitive works of art.",
-    authorName: "Kai Bergström",
-    authorRole: "Cinematographer",
-    authorAvatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop"
+    headline: "The art of being seen. *The power of being chosen*.",
+    subtitle: "A space where talent gets discovered, opportunities take shape, and careers move forward."
   },
   {
     id: "slide-4",
     imageUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=2000&auto=format&fit=crop",
     tag: "Global Stage",
-    headline: "Transcending boundaries of *voice and identity*",
-    subtitle: "A worldwide casting collective where true presence commands attention.",
-    authorName: "Elena Vance",
-    authorRole: "Actor / Lead",
-    authorAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400&auto=format&fit=crop"
+    headline: "Some roles are written. *Others are waiting to be discovered*.",
+    subtitle: "Discover opportunities, meet the right people, and take your next step in the world of performance."
   },
   {
     id: "slide-5",
     imageUrl: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2000&auto=format&fit=crop",
     tag: "Creative Collective",
-    headline: "Where every audition becomes *an indelible performance*",
-    subtitle: "Built for actors, casting directors, and creators who value depth and craft.",
-    authorName: "Nikeran Tarone",
-    authorRole: "Visual Artist",
-    authorAvatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=400&auto=format&fit=crop"
+    headline: "Every face has a story. *Every story deserves its cast*.",
+    subtitle: "Bringing actors, casting directors, and creators together to turn creative visions into reality."
   }
 ];
 
