@@ -168,3 +168,32 @@ body {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+/* Editorial Form Inputs */
+.input-editorial {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input-editorial::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+.input-editorial:focus {
+  border-color: #F7FFB8;
+  box-shadow: 0 0 0 1px #F7FFB8;
+}
+
+.input-editorial-mauve {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input-editorial-mauve::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+.input-editorial-mauve:focus {
+  border-color: #DBAAF4;
+  box-shadow: 0 0 0 1px #DBAAF4;
+}

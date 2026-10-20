@@ -66,18 +66,18 @@ export const FeaturedTalent: React.FC = () => {
                 >
                   {/* Active Card Bottom Green Glow */}
                   {isActive && (
-                    <div className="absolute -bottom-16 left-0 right-0 h-36 bg-gradient-to-t from-emerald-500/25 to-transparent pointer-events-none" />
+                    <div className="absolute -bottom-16 left-0 right-0 h-36 bg-linear-to-t from-emerald-500/25 to-transparent pointer-events-none" />
                   )}
 
                   {/* Top: Social Circle Buttons */}
                   <div className="flex items-center gap-2 mb-6">
-                    <span className="w-8 h-8 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center text-white/70">
+                    <span className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70">
                       <TwitterIcon className="w-3.5 h-3.5" />
                     </span>
-                    <span className="w-8 h-8 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center text-white/70">
+                    <span className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70">
                       <InstagramIcon className="w-3.5 h-3.5" />
                     </span>
-                    <span className="w-8 h-8 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center text-white/70">
+                    <span className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70">
                       <Globe className="w-3.5 h-3.5" />
                     </span>
                   </div>
@@ -136,8 +136,8 @@ export const FeaturedTalent: React.FC = () => {
          ========================================================================= */}
       <section className="w-full overflow-hidden relative py-6">
         {/* Edge Gradient Mask Overlays */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 md:w-44 bg-gradient-to-r from-[#070707] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 md:w-44 bg-gradient-to-l from-[#070707] to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-24 md:w-44 bg-linear-to-r from-[#070707] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 md:w-44 bg-linear-to-l from-[#070707] to-transparent z-10 pointer-events-none" />
 
         <div className="flex flex-col gap-4">
           {/* Row 1 (Translates Left) */}
@@ -145,7 +145,7 @@ export const FeaturedTalent: React.FC = () => {
             {[...MARQUEE_TILES, ...MARQUEE_TILES].map((img, i) => (
               <div
                 key={`r1-${i}`}
-                className="w-40 h-40 md:w-48 md:h-48 rounded-[24px] overflow-hidden border border-white/10 flex-shrink-0"
+                className="w-40 h-40 md:w-48 md:h-48 rounded-3xl overflow-hidden border border-white/10 shrink-0"
               >
                 <img
                   src={img}
@@ -161,7 +161,7 @@ export const FeaturedTalent: React.FC = () => {
             {[...MARQUEE_TILES.slice(4), ...MARQUEE_TILES].map((img, i) => (
               <div
                 key={`r2-${i}`}
-                className="w-40 h-40 md:w-48 md:h-48 rounded-[24px] overflow-hidden border border-white/10 flex-shrink-0"
+                className="w-40 h-40 md:w-48 md:h-48 rounded-3xl overflow-hidden border border-white/10 shrink-0"
               >
                 <img
                   src={img}
@@ -177,7 +177,7 @@ export const FeaturedTalent: React.FC = () => {
             {[...MARQUEE_TILES.slice(2), ...MARQUEE_TILES].map((img, i) => (
               <div
                 key={`r3-${i}`}
-                className="w-40 h-40 md:w-48 md:h-48 rounded-[24px] overflow-hidden border border-white/10 flex-shrink-0"
+                className="w-40 h-40 md:w-48 md:h-48 rounded-3xl overflow-hidden border border-white/10 shrink-0"
               >
                 <img
                   src={img}

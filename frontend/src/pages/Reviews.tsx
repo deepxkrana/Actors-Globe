@@ -13,14 +13,14 @@ export const Reviews: React.FC = () => {
           SECTION 1: HERO WITH CLOUDSCAPE ART
          ========================================================================= */}
       <section className="w-full">
-        <div className="relative rounded-[36px] overflow-hidden p-8 md:p-14 border border-white/10 min-h-[360px] md:min-h-[420px] flex flex-col justify-end bg-gradient-to-t from-black via-black/40 to-transparent">
+        <div className="relative rounded-[36px] overflow-hidden p-8 md:p-14 border border-white/10 min-h-90 md:min-h-105 flex flex-col justify-end bg-linear-to-t from-black via-black/40 to-transparent">
           {/* Pastel Cloudscape Background Image */}
           <img
             src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2000&auto=format&fit=crop"
             alt="Dreamy Cloudscape Atmosphere"
             className="absolute inset-0 w-full h-full object-cover opacity-60"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-t from-black via-black/30 to-transparent pointer-events-none" />
 
           <div className="relative z-10 max-w-xl">
             <div className="self-start inline-block px-4 py-1.5 rounded-full glass border border-white/20 text-xs font-medium text-white/90 mb-3">
@@ -76,7 +76,7 @@ export const Reviews: React.FC = () => {
               <div
                 key={item.id}
                 onClick={() => setActiveTestimonialIdx(idx)}
-                className={`rounded-[32px] md:rounded-[36px] p-7 md:p-8 border flex flex-col justify-between transition-all duration-500 cursor-pointer relative overflow-hidden bg-gradient-to-b ${
+                className={`rounded-4xl md:rounded-[36px] p-7 md:p-8 border flex flex-col justify-between transition-all duration-500 cursor-pointer relative overflow-hidden bg-linear-to-b ${
                   item.gradient
                 } ${
                   isActive

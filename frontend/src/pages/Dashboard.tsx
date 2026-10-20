@@ -184,7 +184,7 @@ export const Dashboard: React.FC = () => {
         <div className="flex items-center gap-3">
           <Link
             to="/subscriptions"
-            className="px-4 py-2 rounded-full bg-white/[0.05] border border-white/15 text-xs font-semibold text-[#F7FFB8] hover:bg-white/10 transition-colors flex items-center gap-1.5"
+            className="px-4 py-2 rounded-full bg-white/5 border border-white/15 text-xs font-semibold text-[#F7FFB8] hover:bg-white/10 transition-colors flex items-center gap-1.5"
           >
             <Sparkles className="w-3.5 h-3.5" />
             <span>Manage Plan</span>
@@ -201,7 +201,7 @@ export const Dashboard: React.FC = () => {
               className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-colors whitespace-nowrap cursor-pointer ${
                 activeTab === "applications"
                   ? "bg-white text-black"
-                  : "text-[#B9B9BE] hover:text-white bg-white/[0.03]"
+                  : "text-[#B9B9BE] hover:text-white bg-white/3"
               }`}
             >
               My Applications ({applications.length})
@@ -211,7 +211,7 @@ export const Dashboard: React.FC = () => {
               className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-colors whitespace-nowrap cursor-pointer ${
                 activeTab === "requests"
                   ? "bg-white text-black"
-                  : "text-[#B9B9BE] hover:text-white bg-white/[0.03]"
+                  : "text-[#B9B9BE] hover:text-white bg-white/3"
               }`}
             >
               Direct Casting Invitations ({castingRequests.length})
@@ -221,7 +221,7 @@ export const Dashboard: React.FC = () => {
               className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-colors whitespace-nowrap cursor-pointer ${
                 activeTab === "profile"
                   ? "bg-white text-black"
-                  : "text-[#B9B9BE] hover:text-white bg-white/[0.03]"
+                  : "text-[#B9B9BE] hover:text-white bg-white/3"
               }`}
             >
               Portfolio & Profile
@@ -236,7 +236,7 @@ export const Dashboard: React.FC = () => {
               className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-colors whitespace-nowrap cursor-pointer ${
                 activeTab === "projects"
                   ? "bg-white text-black"
-                  : "text-[#B9B9BE] hover:text-white bg-white/[0.03]"
+                  : "text-[#B9B9BE] hover:text-white bg-white/3"
               }`}
             >
               Active Casting Calls ({projects.length})
@@ -246,7 +246,7 @@ export const Dashboard: React.FC = () => {
               className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-colors whitespace-nowrap cursor-pointer ${
                 activeTab === "new-project"
                   ? "bg-[#F7FFB8] text-black"
-                  : "text-[#B9B9BE] hover:text-white bg-white/[0.03]"
+                  : "text-[#B9B9BE] hover:text-white bg-white/3"
               }`}
             >
               + Post New Casting Call
@@ -259,7 +259,7 @@ export const Dashboard: React.FC = () => {
           className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-colors whitespace-nowrap cursor-pointer ${
             activeTab === "messages"
               ? "bg-white text-black"
-              : "text-[#B9B9BE] hover:text-white bg-white/[0.03]"
+              : "text-[#B9B9BE] hover:text-white bg-white/3"
           }`}
         >
           Direct Messages ({conversations.length})
@@ -286,7 +286,7 @@ export const Dashboard: React.FC = () => {
               {applications.map((app) => (
                 <div
                   key={app.id}
-                  className="rounded-[24px] bg-[#0E0E0F] border border-white/10 p-5 flex flex-col justify-between"
+                  className="rounded-3xl bg-[#0E0E0F] border border-white/10 p-5 flex flex-col justify-between"
                 >
                   <div className="flex items-start justify-between mb-3">
                     <div>
@@ -361,7 +361,7 @@ export const Dashboard: React.FC = () => {
               {castingRequests.map((req) => (
                 <div
                   key={req.id}
-                  className="rounded-[24px] bg-[#0E0E0F] border border-white/10 p-5 flex flex-col justify-between"
+                  className="rounded-3xl bg-[#0E0E0F] border border-white/10 p-5 flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-2">
@@ -416,7 +416,7 @@ export const Dashboard: React.FC = () => {
               value={stageName}
               onChange={(e) => setStageName(e.target.value)}
               placeholder="e.g. Lewis Daller"
-              className="w-full h-11 px-4 rounded-xl bg-black/50 border border-white/15 text-xs text-white focus:outline-none focus:border-[#F7FFB8]"
+              className="w-full h-11 px-4 rounded-xl bg-black/50 input-editorial text-xs"
             />
           </div>
 
@@ -427,7 +427,7 @@ export const Dashboard: React.FC = () => {
               value={headshotUrl}
               onChange={(e) => setHeadshotUrl(e.target.value)}
               placeholder="https://images.unsplash.com/... or uploaded asset URL"
-              className="w-full h-11 px-4 rounded-xl bg-black/50 border border-white/15 text-xs text-white focus:outline-none focus:border-[#F7FFB8]"
+              className="w-full h-11 px-4 rounded-xl bg-black/50 input-editorial text-xs"
             />
           </div>
 
@@ -438,7 +438,7 @@ export const Dashboard: React.FC = () => {
               value={reelUrl}
               onChange={(e) => setReelUrl(e.target.value)}
               placeholder="https://vimeo.com/... or YouTube link"
-              className="w-full h-11 px-4 rounded-xl bg-black/50 border border-white/15 text-xs text-white focus:outline-none focus:border-[#F7FFB8]"
+              className="w-full h-11 px-4 rounded-xl bg-black/50 input-editorial text-xs"
             />
           </div>
 
@@ -447,7 +447,7 @@ export const Dashboard: React.FC = () => {
             <select
               value={unionStatus}
               onChange={(e) => setUnionStatus(e.target.value)}
-              className="w-full h-11 px-4 rounded-xl bg-black/50 border border-white/15 text-xs text-white focus:outline-none focus:border-[#F7FFB8]"
+              className="w-full h-11 px-4 rounded-xl bg-black/50 input-editorial text-xs"
             >
               <option value="NON_UNION">Non-Union</option>
               <option value="SAG_AFTRA">SAG-AFTRA</option>
@@ -462,7 +462,7 @@ export const Dashboard: React.FC = () => {
               value={bio}
               onChange={(e) => setBio(e.target.value)}
               placeholder="Detail your vocal range, training background, and performance focus..."
-              className="w-full p-4 rounded-xl bg-black/50 border border-white/15 text-xs text-white focus:outline-none focus:border-[#F7FFB8]"
+              className="w-full p-4 rounded-xl bg-black/50 input-editorial text-xs"
             />
           </div>
 
@@ -497,7 +497,7 @@ export const Dashboard: React.FC = () => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {projects.map((p) => (
-                <div key={p.id} className="rounded-[24px] bg-[#0E0E0F] border border-white/10 p-5 flex flex-col justify-between">
+                <div key={p.id} className="rounded-3xl bg-[#0E0E0F] border border-white/10 p-5 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-xs text-[#F7FFB8] font-semibold">{p.projectType}</span>
@@ -537,7 +537,7 @@ export const Dashboard: React.FC = () => {
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
               placeholder="e.g. Nocturne in Minor Key"
-              className="w-full h-11 px-4 rounded-xl bg-black/50 border border-white/15 text-xs text-white focus:outline-none focus:border-[#F7FFB8]"
+              className="w-full h-11 px-4 rounded-xl bg-black/50 input-editorial text-xs"
             />
           </div>
 
@@ -648,7 +648,7 @@ export const Dashboard: React.FC = () => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {conversations.map((conv) => (
-                <div key={conv.id} className="rounded-[24px] bg-[#0E0E0F] border border-white/10 p-5 flex items-center justify-between">
+                <div key={conv.id} className="rounded-3xl bg-[#0E0E0F] border border-white/10 p-5 flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center font-bold text-white text-sm">
                       {conv.otherUser?.name?.[0] || "U"}

@@ -47,7 +47,7 @@ export const Blog: React.FC = () => {
           </button>
 
           {/* Left Side Peek Card */}
-          <div className="hidden lg:block w-[18%] h-[360px] rounded-[28px] overflow-hidden opacity-35 border border-white/10 flex-shrink-0">
+          <div className="hidden lg:block w-[18%] h-90 rounded-[28px] overflow-hidden opacity-35 border border-white/10 shrink-0">
             <img
               src={BLOG_ARTICLES[1].imageUrl}
               alt="Peek Left"
@@ -56,13 +56,13 @@ export const Blog: React.FC = () => {
           </div>
 
           {/* Center Main Featured Card */}
-          <div className="w-full lg:w-[64%] h-[460px] md:h-[520px] rounded-[32px] md:rounded-[36px] overflow-hidden border border-white/15 relative flex-shrink-0 shadow-2xl flex flex-col justify-end p-6 md:p-10 group">
+          <div className="w-full lg:w-[64%] h-115 md:h-130 rounded-4xl md:rounded-[36px] overflow-hidden border border-white/15 relative shrink-0 shadow-2xl flex flex-col justify-end p-6 md:p-10 group">
             <img
               src={featuredArticle.imageUrl}
               alt={featuredArticle.title}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/95 via-black/40 to-transparent pointer-events-none" />
 
             <div className="relative z-10 flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
               <div className="max-w-xl">
@@ -88,7 +88,7 @@ export const Blog: React.FC = () => {
           </div>
 
           {/* Right Side Peek Card */}
-          <div className="hidden lg:block w-[18%] h-[360px] rounded-[28px] overflow-hidden opacity-35 border border-white/10 flex-shrink-0">
+          <div className="hidden lg:block w-[18%] h-90 rounded-[28px] overflow-hidden opacity-35 border border-white/10 shrink-0">
             <img
               src={BLOG_ARTICLES[2].imageUrl}
               alt="Peek Right"
@@ -151,7 +151,7 @@ export const Blog: React.FC = () => {
                 </div>
 
                 <div className="flex items-center justify-between pt-4 mt-4 border-t border-white/10 text-xs text-[#8A8A90]">
-                  <span className="px-2.5 py-0.5 rounded-full bg-white/[0.05] border border-white/10 text-white font-medium">
+                  <span className="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-white font-medium">
                     {article.category}
                   </span>
                   <span>{article.date}</span>

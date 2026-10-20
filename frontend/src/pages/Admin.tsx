@@ -81,7 +81,7 @@ export const Admin: React.FC = () => {
       <div className="flex items-center justify-center py-20 px-4">
         <form
           onSubmit={handleAdminLogin}
-          className="w-full max-w-md rounded-[32px] bg-[#0E0E0F] border border-white/10 p-8 glass flex flex-col gap-5 shadow-2xl"
+          className="w-full max-w-md rounded-4xl bg-[#0E0E0F] border border-white/10 p-8 glass flex flex-col gap-5 shadow-2xl"
         >
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center">
@@ -106,7 +106,7 @@ export const Admin: React.FC = () => {
               value={adminEmail}
               onChange={(e) => setAdminEmail(e.target.value)}
               placeholder="admin@actorsglobe.com"
-              className="w-full h-11 px-4 rounded-xl bg-black/50 border border-white/15 text-xs text-white focus:outline-none focus:border-[#F7FFB8]"
+              className="w-full h-11 px-4 rounded-xl bg-black/50 input-editorial text-xs"
             />
           </div>
 
@@ -118,7 +118,7 @@ export const Admin: React.FC = () => {
               value={secretKey}
               onChange={(e) => setSecretKey(e.target.value)}
               placeholder="••••••••••••••••"
-              className="w-full h-11 px-4 rounded-xl bg-black/50 border border-white/15 text-xs text-white focus:outline-none focus:border-[#F7FFB8]"
+              className="w-full h-11 px-4 rounded-xl bg-black/50 input-editorial text-xs"
             />
           </div>
 
@@ -157,19 +157,19 @@ export const Admin: React.FC = () => {
 
       {/* Metrics Row */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="rounded-[24px] bg-[#0E0E0F] border border-white/10 p-5">
+        <div className="rounded-3xl bg-[#0E0E0F] border border-white/10 p-5">
           <span className="text-xs text-[#8A8A90] block mb-1">Total Reports</span>
           <span className="text-3xl font-bold text-white">{stats?.totalReports || reports.length}</span>
         </div>
-        <div className="rounded-[24px] bg-[#0E0E0F] border border-white/10 p-5">
+        <div className="rounded-3xl bg-[#0E0E0F] border border-white/10 p-5">
           <span className="text-xs text-[#8A8A90] block mb-1">Pending Triage</span>
           <span className="text-3xl font-bold text-[#F7FFB8]">{stats?.pendingReports || 0}</span>
         </div>
-        <div className="rounded-[24px] bg-[#0E0E0F] border border-white/10 p-5">
+        <div className="rounded-3xl bg-[#0E0E0F] border border-white/10 p-5">
           <span className="text-xs text-[#8A8A90] block mb-1">Resolved Reports</span>
           <span className="text-3xl font-bold text-emerald-400">{stats?.resolvedReports || 0}</span>
         </div>
-        <div className="rounded-[24px] bg-[#0E0E0F] border border-white/10 p-5">
+        <div className="rounded-3xl bg-[#0E0E0F] border border-white/10 p-5">
           <span className="text-xs text-[#8A8A90] block mb-1">Suspended Accounts</span>
           <span className="text-3xl font-bold text-red-400">{stats?.suspendedUsers || 0}</span>
         </div>
@@ -205,7 +205,7 @@ export const Admin: React.FC = () => {
             {reports.map((report) => (
               <div
                 key={report.id}
-                className="rounded-[24px] bg-[#0E0E0F] border border-white/10 p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
+                className="rounded-3xl bg-[#0E0E0F] border border-white/10 p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
               >
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center gap-2">

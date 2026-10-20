@@ -51,7 +51,7 @@ export const ArticleDetail: React.FC = () => {
         </div>
 
         {/* Right Column: Hero Cinematic Image Frame */}
-        <div className="lg:col-span-5 h-[340px] md:h-[420px] rounded-[32px] md:rounded-[36px] overflow-hidden border border-white/15 relative shadow-2xl">
+        <div className="lg:col-span-5 h-85 md:h-105 rounded-4xl md:rounded-[36px] overflow-hidden border border-white/15 relative shadow-2xl">
           <img
             src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop"
             alt="Constructed Identity Hero"
@@ -74,28 +74,28 @@ export const ArticleDetail: React.FC = () => {
             <div className="flex items-center gap-3">
               <button
                 onClick={handleShare}
-                className="w-11 h-11 rounded-full bg-white/[0.05] border border-white/10 hover:border-white/30 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
+                className="w-11 h-11 rounded-full bg-white/5 border border-white/10 hover:border-white/30 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
                 title="Copy Link"
               >
                 {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <TwitterIcon className="w-4 h-4" />}
               </button>
               <button
                 onClick={handleShare}
-                className="w-11 h-11 rounded-full bg-white/[0.05] border border-white/10 hover:border-white/30 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
+                className="w-11 h-11 rounded-full bg-white/5 border border-white/10 hover:border-white/30 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
                 title="Facebook"
               >
                 <FacebookIcon className="w-4 h-4" />
               </button>
               <button
                 onClick={handleShare}
-                className="w-11 h-11 rounded-full bg-white/[0.05] border border-white/10 hover:border-white/30 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
+                className="w-11 h-11 rounded-full bg-white/5 border border-white/10 hover:border-white/30 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
                 title="LinkedIn"
               >
                 <LinkedInIcon className="w-4 h-4" />
               </button>
               <button
                 onClick={handleShare}
-                className="w-11 h-11 rounded-full bg-white/[0.05] border border-white/10 hover:border-white/30 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
+                className="w-11 h-11 rounded-full bg-white/5 border border-white/10 hover:border-white/30 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
                 title="Email"
               >
                 <Mail className="w-4 h-4" />

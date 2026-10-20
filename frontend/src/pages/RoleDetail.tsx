@@ -121,7 +121,7 @@ export const RoleDetail: React.FC = () => {
               <span className="px-3.5 py-1 rounded-full bg-[#F7FFB8]/10 text-[#F7FFB8] border border-[#F7FFB8]/30 text-xs font-semibold">
                 {role.roleType}
               </span>
-              <span className="text-xs text-[#8A8A90] px-3 py-1 rounded-full bg-white/[0.05] border border-white/10">
+              <span className="text-xs text-[#8A8A90] px-3 py-1 rounded-full bg-white/5 border border-white/10">
                 {role.isUnion ? "SAG-AFTRA" : "Non-Union"}
               </span>
             </div>
@@ -178,7 +178,7 @@ export const RoleDetail: React.FC = () => {
           {/* Report Button */}
           <div className="pt-4 border-t border-white/10">
             {reporting ? (
-              <form onSubmit={handleReport} className="flex flex-col gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/10">
+              <form onSubmit={handleReport} className="flex flex-col gap-3 p-4 rounded-xl bg-white/3 border border-white/10">
                 <span className="text-xs text-white font-medium">Report this Casting Notice</span>
                 <input
                   type="text"
@@ -211,7 +211,7 @@ export const RoleDetail: React.FC = () => {
 
         {/* Right Column: Submission Form Card */}
         <div className="lg:col-span-5 self-start">
-          <div className="rounded-[32px] bg-[#0E0E0F] border border-white/10 p-7 md:p-8 glass sticky top-24">
+          <div className="rounded-4xl bg-[#0E0E0F] border border-white/10 p-7 md:p-8 glass sticky top-24">
             <h3 className="text-xl font-medium text-white mb-2">Submit Audition Application</h3>
             <p className="text-xs text-[#8A8A90] mb-6">
               Your verified portfolio headshots and resume will be securely transmitted to the casting room.
@@ -251,7 +251,7 @@ export const RoleDetail: React.FC = () => {
                     placeholder="https://vimeo.com/..., YouTube, or cloud reel link"
                     value={auditionTapeUrl}
                     onChange={(e) => setAuditionTapeUrl(e.target.value)}
-                    className="w-full h-11 px-4 rounded-xl bg-black/50 border border-white/15 text-xs text-white placeholder-white/30 focus:outline-none focus:border-[#F7FFB8]"
+                    className="w-full h-11 px-4 rounded-xl bg-black/50 input-editorial text-xs"
                   />
                 </div>
 
@@ -264,7 +264,7 @@ export const RoleDetail: React.FC = () => {
                     placeholder="Share any special skills, dialects, or your artistic connection to this role..."
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    className="w-full p-4 rounded-xl bg-black/50 border border-white/15 text-xs text-white placeholder-white/30 focus:outline-none focus:border-[#F7FFB8]"
+                    className="w-full p-4 rounded-xl bg-black/50 input-editorial text-xs"
                   />
                 </div>
 

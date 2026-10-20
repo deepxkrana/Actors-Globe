@@ -55,14 +55,14 @@ export const AboutUs: React.FC = () => {
           SECTION 2: GOLDEN 3D WAVE CENTERPIECE
          ========================================================================= */}
       <section className="w-full">
-        <div className="relative w-full h-80 md:h-[440px] rounded-[32px] md:rounded-[36px] overflow-hidden border border-white/10 flex items-center justify-center p-6 bg-gradient-to-r from-amber-950/60 via-amber-900/40 to-black">
+        <div className="relative w-full h-80 md:h-110 rounded-4xl md:rounded-[36px] overflow-hidden border border-white/10 flex items-center justify-center p-6 bg-linear-to-r from-amber-950/60 via-amber-900/40 to-black">
           {/* Background Golden Waves Render Imagery */}
           <img
             src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=2000&auto=format&fit=crop"
             alt="3D Golden Wave Architecture"
             className="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-70"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-black/40 pointer-events-none" />
 
           {/* Centered Liquid Chrome Brand Typography */}
           <div className="relative z-10 flex items-baseline select-none">
@@ -147,7 +147,7 @@ export const AboutUs: React.FC = () => {
       <section className="w-full">
         <div className="relative rounded-[36px] overflow-hidden p-8 md:p-14 border border-white/15 bg-[#0A160E]">
           {/* Motion-Streak Nature Blur Background */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-[#1A3824] via-[#0E4B70]/30 to-[#B7C95A]/20 pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-tr from-[#1A3824] via-[#0E4B70]/30 to-[#B7C95A]/20 pointer-events-none" />
 
           <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10">
             <div>
@@ -173,7 +173,7 @@ export const AboutUs: React.FC = () => {
               return (
                 <div
                   key={pillar.id}
-                  className="rounded-[28px] p-7 glass border border-white/20 flex flex-col justify-between min-h-[260px] hover:border-white/40 transition-colors"
+                  className="rounded-[28px] p-7 glass border border-white/20 flex flex-col justify-between min-h-65 hover:border-white/40 transition-colors"
                 >
                   <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white mb-6">
                     <Icon className="w-6 h-6 text-[#F7FFB8]" />
@@ -237,7 +237,7 @@ export const AboutUs: React.FC = () => {
           })}
 
           {/* Olive "12+ Members" Circle */}
-          <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-[#4A5A1E] to-[#2A3310] border border-white/20 flex flex-col items-center justify-center text-white shadow-xl">
+          <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-linear-to-br from-[#4A5A1E] to-[#2A3310] border border-white/20 flex flex-col items-center justify-center text-white shadow-xl">
             <span className="text-2xl md:text-3xl font-bold">12+</span>
             <span className="text-xs text-[#F7FFB8]">Members</span>
           </div>

@@ -204,7 +204,7 @@ export const Footer: React.FC = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={subscribed ? "Thank you for subscribing!" : "Your email"}
                 disabled={subscribed}
-                className="w-full h-12 pl-4 pr-14 rounded-full bg-[#0A0A0A] border border-white/15 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-1 focus:ring-[#dbaaf4] transition-colors"
+                className="w-full h-12 pl-4 pr-14 rounded-full bg-[#0A0A0A] input-editorial-mauve text-sm"
               />
               <button
                 type="submit"

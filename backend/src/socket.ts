@@ -3,10 +3,7 @@ import type { Server as HttpServer } from "node:http";
 import { config } from "./config/env.js";
 import { verifyToken } from "./utils/jwt.js";
 import type { AuthTokenPayload } from "./types/auth.js";
-import {
-  verifyConversationMembership,
-  sendMessage
-} from "./services/message.service.js";
+// Note: message.service.js is dynamically imported in socket event handlers to prevent circular ESM dependencies
 
 let io: SocketIOServer | null = null;
 
@@ -67,6 +64,7 @@ export const initSocketServer = (httpServer: HttpServer): SocketIOServer => {
           return;
         }
 
+        const { verifyConversationMembership } = await import("./services/message.service.js");
         const isMember = await verifyConversationMembership(
           user.userId,
           data.conversationId
@@ -109,6 +107,7 @@ export const initSocketServer = (httpServer: HttpServer): SocketIOServer => {
             return;
           }
 
+          const { sendMessage } = await import("./services/message.service.js");
           const message = await sendMessage(
             user.userId,
             data.conversationId,

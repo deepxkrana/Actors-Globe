@@ -107,7 +107,7 @@ export const Subscriptions: React.FC = () => {
         </p>
 
         {/* Monthly / Yearly Toggle */}
-        <div className="inline-flex items-center p-1 rounded-full bg-white/[0.05] border border-white/10 mt-8">
+        <div className="inline-flex items-center p-1 rounded-full bg-white/5 border border-white/10 mt-8">
           <button
             onClick={() => setBillingCycle("monthly")}
             className={`px-5 py-2 text-xs font-semibold rounded-full transition-colors cursor-pointer ${
@@ -143,7 +143,7 @@ export const Subscriptions: React.FC = () => {
           return (
             <div
               key={plan.id}
-              className={`rounded-[32px] p-7 md:p-8 flex flex-col justify-between transition-all duration-300 relative ${
+              className={`rounded-4xl p-7 md:p-8 flex flex-col justify-between transition-all duration-300 relative ${
                 plan.isPopular
                   ? "bg-[#0E0E0F] border-2 border-[#F7FFB8] shadow-2xl shadow-[#F7FFB8]/10"
                   : "bg-[#0D0D0E] border border-white/10"

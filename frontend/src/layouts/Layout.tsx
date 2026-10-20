@@ -10,7 +10,7 @@ export const Layout: React.FC = () => {
       <div className="fixed inset-0 pointer-events-none z-0 ambient-swirl-mesh opacity-80" />
 
       {/* The Master Site Container Frame (1380px max-width, 44px radius, 1px border) */}
-      <div className="relative z-10 max-w-[1380px] mx-auto rounded-[32px] md:rounded-[44px] bg-[#070707] border border-white/10 shadow-2xl shadow-black overflow-hidden">
+      <div className="relative z-10 max-w-345 mx-auto rounded-4xl md:rounded-[44px] bg-[#070707] border border-white/10 shadow-2xl shadow-black overflow-hidden">
         <Navbar />
 
         <main className="w-full">

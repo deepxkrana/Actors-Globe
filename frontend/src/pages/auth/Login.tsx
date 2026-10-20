@@ -32,7 +32,7 @@ export const Login: React.FC = () => {
 
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md rounded-[32px] bg-[#0E0E0F] border border-white/10 p-8 md:p-10 glass shadow-2xl relative overflow-hidden">
+      <div className="w-full max-w-md rounded-4xl bg-[#0E0E0F] border border-white/10 p-8 md:p-10 glass shadow-2xl relative overflow-hidden">
         {/* Subtle background glow */}
         <div className="absolute top-0 right-0 w-32 h-32 bg-[#F7FFB8]/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -63,7 +63,7 @@ export const Login: React.FC = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@domain.com"
-              className="w-full h-11 px-4 rounded-xl bg-black/50 border border-white/15 text-xs text-white placeholder-white/30 focus:outline-none focus:border-[#F7FFB8] transition-colors"
+              className="w-full h-11 px-4 rounded-xl bg-black/50 input-editorial text-xs"
             />
           </div>
 
@@ -75,7 +75,7 @@ export const Login: React.FC = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••••••"
-              className="w-full h-11 px-4 rounded-xl bg-black/50 border border-white/15 text-xs text-white placeholder-white/30 focus:outline-none focus:border-[#F7FFB8] transition-colors"
+              className="w-full h-11 px-4 rounded-xl bg-black/50 input-editorial text-xs"
             />
           </div>
 

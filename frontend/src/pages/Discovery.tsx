@@ -72,7 +72,7 @@ export const Discovery: React.FC = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by character name, project title, or keywords..."
-              className="w-full h-12 pl-12 pr-28 rounded-full bg-black/40 border border-white/15 text-sm text-white placeholder-white/40 focus:outline-none focus:border-[#F7FFB8] transition-colors"
+              className="w-full h-12 pl-12 pr-28 rounded-full bg-black/40 input-editorial text-sm"
             />
             <button
               type="submit"
@@ -92,7 +92,7 @@ export const Discovery: React.FC = () => {
             <select
               value={selectedProjectType}
               onChange={(e) => setSelectedProjectType(e.target.value)}
-              className="px-3.5 py-1.5 rounded-full bg-white/[0.05] border border-white/15 text-white focus:outline-none cursor-pointer"
+              className="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/15 text-white focus:outline-none cursor-pointer"
             >
               <option value="" className="bg-[#111]">All Project Types</option>
               <option value="FEATURE_FILM" className="bg-[#111]">Feature Film</option>
@@ -106,7 +106,7 @@ export const Discovery: React.FC = () => {
             <select
               value={selectedRoleType}
               onChange={(e) => setSelectedRoleType(e.target.value)}
-              className="px-3.5 py-1.5 rounded-full bg-white/[0.05] border border-white/15 text-white focus:outline-none cursor-pointer"
+              className="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/15 text-white focus:outline-none cursor-pointer"
             >
               <option value="" className="bg-[#111]">All Role Types</option>
               <option value="LEAD" className="bg-[#111]">Lead</option>
@@ -119,7 +119,7 @@ export const Discovery: React.FC = () => {
             <select
               value={selectedUnion}
               onChange={(e) => setSelectedUnion(e.target.value)}
-              className="px-3.5 py-1.5 rounded-full bg-white/[0.05] border border-white/15 text-white focus:outline-none cursor-pointer"
+              className="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/15 text-white focus:outline-none cursor-pointer"
             >
               <option value="" className="bg-[#111]">Any Union Status</option>
               <option value="SAG_AFTRA" className="bg-[#111]">SAG-AFTRA</option>
@@ -151,7 +151,7 @@ export const Discovery: React.FC = () => {
             <span>Scanning casting notices...</span>
           </div>
         ) : roles.length === 0 ? (
-          <div className="text-center py-20 rounded-[32px] bg-[#0E0E0F] border border-white/10 p-8">
+          <div className="text-center py-20 rounded-4xl bg-[#0E0E0F] border border-white/10 p-8">
             <Film className="w-12 h-12 text-[#8A8A90] mx-auto mb-4 opacity-50" />
             <h3 className="text-xl font-medium text-white mb-2">No active casting notices found</h3>
             <p className="text-sm text-[#8A8A90] max-w-md mx-auto">
@@ -168,7 +168,7 @@ export const Discovery: React.FC = () => {
                 <div>
                   {/* Top Badges */}
                   <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 text-xs font-semibold text-[#F7FFB8]">
+                    <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-[#F7FFB8]">
                       {role.roleType}
                     </span>
                     <span className="text-xs text-[#8A8A90]">
