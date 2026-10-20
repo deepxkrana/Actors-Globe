@@ -58,11 +58,15 @@ export const Dashboard: React.FC = () => {
             api.getMyCastingRequests(),
             api.getMyProfile()
           ]);
-          if (appRes.success && appRes.data) setApplications(appRes.data);
-          if (reqRes.success && reqRes.data) setCastingRequests(reqRes.data);
+          if (appRes.success && appRes.data) {
+            setApplications(Array.isArray(appRes.data) ? appRes.data : []);
+          }
+          if (reqRes.success && reqRes.data) {
+            setCastingRequests(Array.isArray(reqRes.data) ? reqRes.data : []);
+          }
           if (profRes.success && profRes.data?.profile) {
             const p: any = profRes.data.profile;
-            setStageName(p.stageName || "");
+            setStageName(p.displayName || p.stageName || "");
             setBio(p.bio || "");
             setHeadshotUrl(p.headshotUrl || "");
             setReelUrl(p.reelUrl || "");
@@ -70,14 +74,25 @@ export const Dashboard: React.FC = () => {
           }
         } else if (isCaster) {
           const [projRes] = await Promise.all([
-            api.getProjects(),
+            api.getMyProjects(),
             api.getMyProfile()
           ]);
-          if (projRes.success && projRes.data) setProjects(projRes.data);
+          if (projRes.success && projRes.data) {
+            let projs = Array.isArray(projRes.data) ? projRes.data : [];
+            if (projs.length === 0) {
+              const pubRes = await api.getProjects();
+              if (pubRes.success && Array.isArray(pubRes.data)) {
+                projs = pubRes.data;
+              }
+            }
+            setProjects(projs);
+          }
         }
 
         const convRes = await api.getConversations();
-        if (convRes.success && convRes.data) setConversations(convRes.data);
+        if (convRes.success && convRes.data) {
+          setConversations(Array.isArray(convRes.data) ? convRes.data : []);
+        }
       } catch (err) {
         console.error(err);
       } finally {
@@ -204,7 +219,7 @@ export const Dashboard: React.FC = () => {
                   : "text-[#B9B9BE] hover:text-white bg-white/3"
               }`}
             >
-              My Applications ({applications.length})
+              My Applications ({Array.isArray(applications) ? applications.length : 0})
             </button>
             <button
               onClick={() => setActiveTab("requests")}
@@ -214,7 +229,7 @@ export const Dashboard: React.FC = () => {
                   : "text-[#B9B9BE] hover:text-white bg-white/3"
               }`}
             >
-              Direct Casting Invitations ({castingRequests.length})
+              Direct Casting Invitations ({Array.isArray(castingRequests) ? castingRequests.length : 0})
             </button>
             <button
               onClick={() => setActiveTab("profile")}
@@ -239,7 +254,7 @@ export const Dashboard: React.FC = () => {
                   : "text-[#B9B9BE] hover:text-white bg-white/3"
               }`}
             >
-              Active Casting Calls ({projects.length})
+              Active Casting Calls ({Array.isArray(projects) ? projects.length : 0})
             </button>
             <button
               onClick={() => setActiveTab("new-project")}
@@ -262,7 +277,7 @@ export const Dashboard: React.FC = () => {
               : "text-[#B9B9BE] hover:text-white bg-white/3"
           }`}
         >
-          Direct Messages ({conversations.length})
+          Direct Messages ({Array.isArray(conversations) ? conversations.length : 0})
         </button>
       </div>
 
@@ -270,7 +285,7 @@ export const Dashboard: React.FC = () => {
       {isActor && activeTab === "applications" && (
         <div className="flex flex-col gap-4">
           <h2 className="text-lg font-medium text-white mb-2">Audition Submissions</h2>
-          {applications.length === 0 ? (
+          {!Array.isArray(applications) || applications.length === 0 ? (
             <div className="text-center py-16 rounded-[28px] bg-[#0E0E0F] border border-white/10 p-8">
               <Film className="w-10 h-10 text-[#8A8A90] mx-auto mb-3 opacity-60" />
               <h3 className="text-base font-medium text-white mb-1">No applications submitted yet</h3>
@@ -283,7 +298,7 @@ export const Dashboard: React.FC = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {applications.map((app) => (
+              {(Array.isArray(applications) ? applications : []).map((app) => (
                 <div
                   key={app.id}
                   className="rounded-3xl bg-[#0E0E0F] border border-white/10 p-5 flex flex-col justify-between"
@@ -348,7 +363,7 @@ export const Dashboard: React.FC = () => {
       {isActor && activeTab === "requests" && (
         <div className="flex flex-col gap-4">
           <h2 className="text-lg font-medium text-white mb-2">Direct Invitations from Casting Directors</h2>
-          {castingRequests.length === 0 ? (
+          {!Array.isArray(castingRequests) || castingRequests.length === 0 ? (
             <div className="text-center py-16 rounded-[28px] bg-[#0E0E0F] border border-white/10 p-8">
               <Send className="w-10 h-10 text-[#8A8A90] mx-auto mb-3 opacity-60" />
               <h3 className="text-base font-medium text-white mb-1">No pending invitations</h3>
@@ -358,7 +373,7 @@ export const Dashboard: React.FC = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {castingRequests.map((req) => (
+              {(Array.isArray(castingRequests) ? castingRequests : []).map((req) => (
                 <div
                   key={req.id}
                   className="rounded-3xl bg-[#0E0E0F] border border-white/10 p-5 flex flex-col justify-between"
@@ -488,7 +503,7 @@ export const Dashboard: React.FC = () => {
             </button>
           </div>
 
-          {projects.length === 0 ? (
+          {!Array.isArray(projects) || projects.length === 0 ? (
             <div className="text-center py-16 rounded-[28px] bg-[#0E0E0F] border border-white/10 p-8">
               <Film className="w-10 h-10 text-[#8A8A90] mx-auto mb-3 opacity-60" />
               <h3 className="text-base font-medium text-white mb-1">No casting calls posted yet</h3>
@@ -496,7 +511,7 @@ export const Dashboard: React.FC = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {projects.map((p) => (
+              {(Array.isArray(projects) ? projects : []).map((p) => (
                 <div key={p.id} className="rounded-3xl bg-[#0E0E0F] border border-white/10 p-5 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-2">
@@ -637,7 +652,7 @@ export const Dashboard: React.FC = () => {
       {activeTab === "messages" && (
         <div className="flex flex-col gap-4">
           <h2 className="text-lg font-medium text-white mb-2">Direct Messages & Casting Inquiries</h2>
-          {conversations.length === 0 ? (
+          {!Array.isArray(conversations) || conversations.length === 0 ? (
             <div className="text-center py-16 rounded-[28px] bg-[#0E0E0F] border border-white/10 p-8">
               <MessageSquare className="w-10 h-10 text-[#8A8A90] mx-auto mb-3 opacity-60" />
               <h3 className="text-base font-medium text-white mb-1">No active conversation threads</h3>
@@ -647,7 +662,7 @@ export const Dashboard: React.FC = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {conversations.map((conv) => (
+              {(Array.isArray(conversations) ? conversations : []).map((conv) => (
                 <div key={conv.id} className="rounded-3xl bg-[#0E0E0F] border border-white/10 p-5 flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center font-bold text-white text-sm">

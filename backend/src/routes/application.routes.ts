@@ -34,6 +34,13 @@ router.get(
   validateQuery(applicationQuerySchema),
   getActorApplicationsHandler
 );
+router.get(
+  "/my",
+  authenticate,
+  authorizeRole("ACTOR"),
+  validateQuery(applicationQuerySchema),
+  getActorApplicationsHandler
+);
 
 // Caster views applications received for a role
 router.get(

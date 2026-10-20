@@ -34,6 +34,13 @@ router.get(
   validateQuery(castingRequestQuerySchema),
   getActorCastingRequestsHandler
 );
+router.get(
+  "/my",
+  authenticate,
+  authorizeRole("ACTOR"),
+  validateQuery(castingRequestQuerySchema),
+  getActorCastingRequestsHandler
+);
 
 // Caster views sent casting requests
 router.get(

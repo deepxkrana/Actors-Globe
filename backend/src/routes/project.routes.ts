@@ -36,6 +36,12 @@ router.get(
   authorizeRole("CASTER"),
   getMyProjectsHandler
 );
+router.get(
+  "/my",
+  authenticate,
+  authorizeRole("CASTER"),
+  getMyProjectsHandler
+);
 
 // Get single role details
 router.get("/roles/:roleId", optionalAuthenticate, getRoleByIdHandler);

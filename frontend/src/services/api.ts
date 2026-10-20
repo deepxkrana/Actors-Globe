@@ -156,11 +156,29 @@ class ApiClient {
   // --- Projects & Roles ---
   async getProjects(params?: { type?: string; status?: string; search?: string }) {
     const query = new URLSearchParams(params as Record<string, string>).toString();
-    return this.request<Project[]>(`/projects${query ? `?${query}` : ""}`);
+    const res = await this.request<any>(`/projects${query ? `?${query}` : ""}`);
+    const list = Array.isArray(res.data)
+      ? res.data
+      : Array.isArray(res.data?.projects)
+      ? res.data.projects
+      : [];
+    return { ...res, data: list as Project[] };
+  }
+
+  async getMyProjects() {
+    const res = await this.request<any>("/projects/my");
+    const list = Array.isArray(res.data)
+      ? res.data
+      : Array.isArray(res.data?.projects)
+      ? res.data.projects
+      : [];
+    return { ...res, data: list as Project[] };
   }
 
   async getProjectById(id: string) {
-    return this.request<Project>(`/projects/${id}`);
+    const res = await this.request<any>(`/projects/${id}`);
+    const project = res.data?.project || res.data;
+    return { ...res, data: project as Project };
   }
 
   async createProject(data: Omit<Partial<Project>, "roles"> & { roles?: Array<Partial<Role>> }) {
@@ -194,11 +212,19 @@ class ApiClient {
         }
       });
     }
-    return this.request<Role[]>(`/search/roles${searchParams.toString() ? `?${searchParams.toString()}` : ""}`);
+    const res = await this.request<any>(`/search/roles${searchParams.toString() ? `?${searchParams.toString()}` : ""}`);
+    const list = Array.isArray(res.data)
+      ? res.data
+      : Array.isArray(res.data?.roles)
+      ? res.data.roles
+      : [];
+    return { ...res, data: list as Role[] };
   }
 
   async getRoleById(roleId: string) {
-    return this.request<Role>(`/projects/roles/${roleId}`);
+    const res = await this.request<any>(`/projects/roles/${roleId}`);
+    const role = res.data?.role || res.data;
+    return { ...res, data: role as Role };
   }
 
   // --- Applications ---
@@ -210,11 +236,23 @@ class ApiClient {
   }
 
   async getMyApplications() {
-    return this.request<Application[]>("/applications/my");
+    const res = await this.request<any>("/applications/my");
+    const list = Array.isArray(res.data)
+      ? res.data
+      : Array.isArray(res.data?.applications)
+      ? res.data.applications
+      : [];
+    return { ...res, data: list as Application[] };
   }
 
   async getProjectApplications(projectId: string) {
-    return this.request<Application[]>(`/applications/project/${projectId}`);
+    const res = await this.request<any>(`/applications/project/${projectId}`);
+    const list = Array.isArray(res.data)
+      ? res.data
+      : Array.isArray(res.data?.applications)
+      ? res.data.applications
+      : [];
+    return { ...res, data: list as Application[] };
   }
 
   async updateApplicationStatus(id: string, status: string, notes?: string) {
@@ -233,7 +271,15 @@ class ApiClient {
   }
 
   async getMyCastingRequests() {
-    return this.request<CastingRequest[]>("/casting-requests/my");
+    const res = await this.request<any>("/casting-requests/my");
+    const list = Array.isArray(res.data)
+      ? res.data
+      : Array.isArray(res.data?.requests)
+      ? res.data.requests
+      : Array.isArray(res.data?.castingRequests)
+      ? res.data.castingRequests
+      : [];
+    return { ...res, data: list as CastingRequest[] };
   }
 
   async respondToCastingRequest(id: string, status: "ACCEPTED" | "DECLINED") {
@@ -245,7 +291,13 @@ class ApiClient {
 
   // --- Conversations & Messages ---
   async getConversations() {
-    return this.request<Conversation[]>("/conversations");
+    const res = await this.request<any>("/conversations");
+    const list = Array.isArray(res.data)
+      ? res.data
+      : Array.isArray(res.data?.conversations)
+      ? res.data.conversations
+      : [];
+    return { ...res, data: list as Conversation[] };
   }
 
   async getOrCreateConversation(recipientId: string) {
