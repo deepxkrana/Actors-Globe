@@ -104,13 +104,13 @@ export const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="w-full max-w-[1380px] mx-auto px-4 md:px-7 pb-12">
+    <footer className="w-full max-w-345 mx-auto px-4 md:px-7 pb-12">
       <ContactBlock />
 
       {/* 2-Card Asymmetric Footer Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 mt-8">
         {/* Left Card (~62% width on desktop) */}
-        <div className="lg:col-span-8 rounded-[28px] bg-[#141415] border border-white/10 p-7 md:p-9 relative overflow-hidden flex flex-col justify-between min-h-[290px]">
+        <div className="lg:col-span-8 rounded-[28px] bg-[#141415] border border-white/10 p-7 md:p-9 relative overflow-hidden flex flex-col justify-between min-h-72.5">
           {/* Top: Wordmark & Statement */}
           <div className="z-10 max-w-md">
             <Link to="/" className="inline-block mb-3">
@@ -138,7 +138,7 @@ export const Footer: React.FC = () => {
                 <Link
                   key={chip.path}
                   to={chip.path}
-                  className="px-3 py-1.5 text-xs font-medium rounded-full border border-white/10 bg-white/[0.04] text-[#D7D7DB] hover:text-white hover:border-white/25 transition-colors"
+                  className="px-3 py-1.5 text-xs font-medium rounded-full border border-white/10 bg-white/4 text-[#D7D7DB] hover:text-white hover:border-white/25 transition-colors"
                 >
                   {chip.label}
                 </Link>
@@ -152,7 +152,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Right Card (~38% width on desktop) */}
-        <div className="lg:col-span-4 rounded-[28px] bg-[#141415] border border-white/10 p-7 md:p-9 flex flex-col justify-between min-h-[290px]">
+        <div className="lg:col-span-4 rounded-[28px] bg-[#141415] border border-white/10 p-7 md:p-9 flex flex-col justify-between min-h-72.5">
           {/* Top: Socials */}
           <div>
             <h3 className="text-base font-medium text-white mb-4">
@@ -163,7 +163,7 @@ export const Footer: React.FC = () => {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-11 h-11 rounded-full bg-white/[0.05] border border-white/10 hover:border-white/30 flex items-center justify-center text-white/80 hover:text-white transition-colors"
+                className="w-11 h-11 rounded-full bg-white/5 border border-white/10 hover:border-white/30 flex items-center justify-center text-white/80 hover:text-white transition-colors"
                 aria-label="Twitter / X"
               >
                 <TwitterIcon className="w-4 h-4" />
@@ -172,7 +172,7 @@ export const Footer: React.FC = () => {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-11 h-11 rounded-full bg-white/[0.05] border border-white/10 hover:border-white/30 flex items-center justify-center text-white/80 hover:text-white transition-colors"
+                className="w-11 h-11 rounded-full bg-white/5 border border-white/10 hover:border-white/30 flex items-center justify-center text-white/80 hover:text-white transition-colors"
                 aria-label="Instagram"
               >
                 <InstagramIcon className="w-4 h-4" />
@@ -181,7 +181,7 @@ export const Footer: React.FC = () => {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-11 h-11 rounded-full bg-white/[0.05] border border-white/10 hover:border-white/30 flex items-center justify-center text-white/80 hover:text-white transition-colors"
+                className="w-11 h-11 rounded-full bg-white/5 border border-white/10 hover:border-white/30 flex items-center justify-center text-white/80 hover:text-white transition-colors"
                 aria-label="LinkedIn"
               >
                 <LinkedInIcon className="w-4 h-4" />
@@ -204,7 +204,7 @@ export const Footer: React.FC = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={subscribed ? "Thank you for subscribing!" : "Your email"}
                 disabled={subscribed}
-                className="w-full h-12 pl-4 pr-14 rounded-full bg-[#0A0A0A] border border-white/15 text-sm text-white placeholder-white/40 focus:outline-none focus:border-[#DBAAF4] transition-colors"
+                className="w-full h-12 pl-4 pr-14 rounded-full bg-[#0A0A0A] border border-white/15 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-1 focus:ring-[#dbaaf4] transition-colors"
               />
               <button
                 type="submit"

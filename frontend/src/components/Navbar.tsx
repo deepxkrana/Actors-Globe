@@ -24,7 +24,7 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="w-full pt-4 pb-2 px-4 md:px-7 max-w-[1380px] mx-auto z-50 relative">
+    <header className="w-full pt-4 pb-2 px-4 md:px-7 max-w-345 mx-auto z-50 relative">
       <div className="flex items-center justify-between h-16 md:h-20">
         {/* Brand Wordmark */}
         <Link to="/" className="flex items-center gap-1.5 group select-none">
@@ -37,7 +37,7 @@ export const Navbar: React.FC = () => {
 
         {/* Center Capsule Navigation Pill (Desktop) */}
         <nav
-          className="hidden lg:flex items-center p-1 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-xl shadow-lg shadow-black/40"
+          className="hidden lg:flex items-center p-1 rounded-full bg-white/4 border border-white/10 backdrop-blur-xl shadow-lg shadow-black/40"
           aria-label="Main Navigation"
         >
           {navLinks.map((link) => {
@@ -49,7 +49,7 @@ export const Navbar: React.FC = () => {
                 className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
                   active
                     ? "bg-white/10 text-white border border-white/15 shadow-sm"
-                    : "text-[#B9B9BE] hover:text-white hover:bg-white/[0.04]"
+                    : "text-[#B9B9BE] hover:text-white hover:bg-white/4"
                 }`}
               >
                 {link.label}
@@ -64,7 +64,7 @@ export const Navbar: React.FC = () => {
             <div className="flex items-center gap-3">
               <Link
                 to="/dashboard"
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.06] border border-white/15 hover:bg-white/10 text-sm font-medium text-white transition-colors"
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/6 border border-white/15 hover:bg-white/10 text-sm font-medium text-white transition-colors"
               >
                 <LayoutDashboard className="w-4 h-4 text-[#F7FFB8]" />
                 <span>Dashboard</span>
@@ -78,7 +78,7 @@ export const Navbar: React.FC = () => {
                   logout();
                   navigate("/");
                 }}
-                className="w-10 h-10 rounded-full flex items-center justify-center bg-white/[0.04] border border-white/10 hover:bg-red-500/10 hover:border-red-500/30 text-white/70 hover:text-red-400 transition-colors cursor-pointer"
+                className="w-10 h-10 rounded-full flex items-center justify-center bg-white/4 border border-white/10 hover:bg-red-500/10 hover:border-red-500/30 text-white/70 hover:text-red-400 transition-colors cursor-pointer"
                 title="Log Out"
                 aria-label="Log Out"
               >
@@ -89,7 +89,7 @@ export const Navbar: React.FC = () => {
             <div className="flex items-center gap-4">
               <Link
                 to="/login"
-                className="px-5 py-2.5 rounded-full border border-white/20 text-sm font-medium text-white hover:bg-white/[0.08] transition-all duration-200"
+                className="px-5 py-2.5 rounded-full border border-white/20 text-sm font-medium text-white hover:bg-white/8 transition-all duration-200"
               >
                 Log In
               </Link>
@@ -107,7 +107,7 @@ export const Navbar: React.FC = () => {
         {/* Mobile Hamburger Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden w-10 h-10 rounded-full flex items-center justify-center bg-white/[0.06] border border-white/15 text-white cursor-pointer"
+          className="lg:hidden w-10 h-10 rounded-full flex items-center justify-center bg-white/6 border border-white/15 text-white cursor-pointer"
           aria-label="Toggle menu"
         >
           {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -116,7 +116,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer Overlay */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-[72px] bg-[#050505]/95 backdrop-blur-2xl z-40 p-6 flex flex-col justify-between border-t border-white/10 animate-in fade-in duration-200">
+        <div className="lg:hidden fixed inset-0 top-18 bg-[#050505]/95 backdrop-blur-2xl z-40 p-6 flex flex-col justify-between border-t border-white/10 animate-in fade-in duration-200">
           <div className="flex flex-col gap-2">
             {navLinks.map((link) => (
               <Link
@@ -126,7 +126,7 @@ export const Navbar: React.FC = () => {
                 className={`px-4 py-3 text-lg font-medium rounded-2xl transition-colors ${
                   isActive(link.path)
                     ? "bg-white/10 text-white border border-white/15"
-                    : "text-[#B9B9BE] hover:text-white hover:bg-white/[0.04]"
+                    : "text-[#B9B9BE] hover:text-white hover:bg-white/4"
                 }`}
               >
                 {link.label}

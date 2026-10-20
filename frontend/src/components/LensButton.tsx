@@ -21,7 +21,7 @@ export const LensButton: React.FC<LensButtonProps> = ({
         {label}
       </span>
       {/* Dynamic specular glint */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-white/20 via-transparent to-transparent pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity" />
+      <div className="absolute inset-0 rounded-full bg-linear-to-tr from-white/20 via-transparent to-transparent pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity" />
     </button>
   );
 };
