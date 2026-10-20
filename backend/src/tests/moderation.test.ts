@@ -164,7 +164,8 @@ describe("Administration and Moderation Phase 10 Tests", () => {
       // Verify cookie set
       const cookies = res.headers["set-cookie"];
       assert.ok(cookies);
-      assert.ok(cookies.some((c: string) => c.includes("adminToken=")));
+      const cookieArr = Array.isArray(cookies) ? cookies : [cookies as unknown as string];
+      assert.ok(cookieArr.some((c: string) => c.includes("adminToken=")));
     });
 
     test("blocks regular user JWT token from accessing admin routes with 403 Forbidden", async () => {
