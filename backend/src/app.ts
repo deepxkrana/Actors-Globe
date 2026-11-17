@@ -1,15 +1,57 @@
-import express from "express";
+import express, { type Request, type Response, type NextFunction } from "express";
 import cors from "cors";
 import helmet from "helmet";
+import cookieParser from "cookie-parser";
 import prisma from "./config/prisma.js";
+import { config } from "./config/env.js";
+import authRoutes from "./routes/auth.routes.js";
+import profileRoutes from "./routes/profile.routes.js";
+import mediaRoutes from "./routes/media.routes.js";
+import projectRoutes from "./routes/project.routes.js";
+import searchRoutes from "./routes/search.routes.js";
+import applicationRoutes from "./routes/application.routes.js";
+import castingRequestRoutes from "./routes/casting-request.routes.js";
+import notificationRoutes from "./routes/notification.routes.js";
+import conversationRoutes from "./routes/conversation.routes.js";
+import subscriptionRoutes from "./routes/subscription.routes.js";
+import adminRoutes from "./routes/admin.routes.js";
+import reportRoutes from "./routes/report.routes.js";
 
 const app = express();
 
 app.use(helmet());
-app.use(cors());
-app.use(express.json());
+app.use(
+  cors({
+    origin: config.frontendUrl,
+    credentials: true
+  })
+);
+app.use(cookieParser());
+app.use(
+  express.json({
+    verify: (req: any, _res, buf) => {
+      req.rawBody = buf;
+    }
+  })
+);
 
-app.get("/api/health", async (_req, res) => {
+// Static file serving for local media storage
+app.use("/uploads", express.static(config.uploadsDir));
+
+app.use("/api/auth", authRoutes);
+app.use("/api/profiles", profileRoutes);
+app.use("/api/media", mediaRoutes);
+app.use("/api/projects", projectRoutes);
+app.use("/api/search", searchRoutes);
+app.use("/api/applications", applicationRoutes);
+app.use("/api/casting-requests", castingRequestRoutes);
+app.use("/api/notifications", notificationRoutes);
+app.use("/api/conversations", conversationRoutes);
+app.use("/api/subscriptions", subscriptionRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/reports", reportRoutes);
+
+app.get("/api/health", async (_req: Request, res: Response) => {
   try {
     await prisma.$queryRaw`SELECT 1`;
 
@@ -24,6 +66,17 @@ app.get("/api/health", async (_req, res) => {
       message: "Database connection failed"
     });
   }
+});
+
+// Centralized error handler
+app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
+  const message =
+    err instanceof Error ? err.message : "An unexpected server error occurred";
+
+  res.status(500).json({
+    success: false,
+    message
+  });
 });
 
 export default app;
