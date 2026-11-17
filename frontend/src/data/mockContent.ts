@@ -270,11 +270,11 @@ export const BLOG_ARTICLES = [
 ];
 
 export const PARTNERS = [
-  { name: "VOGUE", style: "font-serif tracking-widest text-lg font-bold" },
-  { name: "HYPEBEAST", style: "font-sans tracking-tight text-lg font-black" },
-  { name: "Leica", style: "font-serif italic text-2xl font-semibold", isActive: true },
-  { name: "UNSPLASH", style: "font-sans tracking-widest text-sm font-semibold" },
-  { name: "TASCHEN", style: "font-sans tracking-wider text-base font-bold" },
+  { name: "ACTORS", style: "font-serif tracking-widest text-lg font-bold" },
+  { name: "CASTING DIRECTORS", style: "font-sans tracking-tight text-lg font-black" },
+  { name: "PRODUCTION HOUSES", style: "font-serif italic text-xl font-semibold", isActive: true },
+  { name: "CREATIVE COLLABORATORS", style: "font-sans tracking-widest text-sm font-semibold" },
+  { name: "INDUSTRY PARTNERS", style: "font-sans tracking-wider text-base font-bold" },
   { name: "50+ PARTNERS WORLDWIDE", style: "font-sans text-[10px] tracking-widest uppercase font-medium text-center" }
 ];
 

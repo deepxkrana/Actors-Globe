@@ -12,19 +12,19 @@ export const AboutUs: React.FC = () => {
       id: "pillar-1",
       icon: Compass,
       title: "Freedom of Expression",
-      description: "A space where your performance craft is free from generic trends, algorithm limits, and superficial metrics."
+      description: "A space where actors can showcase their individuality, develop their craft, and tell stories in their own voice."
     },
     {
       id: "pillar-2",
       icon: Sparkles,
-      title: "Creative Equality",
-      description: "Authentic presence matters more than follower counts. Every dedicated performer gets a direct, unbiased casting evaluation."
+      title: "Opportunity Without Barriers",
+      description: "Talent deserves to be discovered for its skill, dedication, and potential—not just its popularity or reach."
     },
     {
       id: "pillar-3",
       icon: Heart,
-      title: "Connected by Vision",
-      description: "We connect performers and casting directors through shared storytelling integrity, not transactional casting calls."
+      title: "Connected by Storytelling",
+      description: "We bring actors, casting directors, and creators together to build meaningful professional relationships and bring creative visions to life."
     }
   ];
 
@@ -39,7 +39,7 @@ export const AboutUs: React.FC = () => {
             About Us
           </div>
           <Headline
-            text="More than *just a feed.* A sanctuary for those *who create.*"
+            text="More than a *platform.* A *home* for those who bring stories to *life.*"
             as="h1"
             accentColor="dune"
             className="text-4xl sm:text-5xl md:text-6xl font-normal text-white tracking-tight leading-[1.12]"
@@ -47,7 +47,7 @@ export const AboutUs: React.FC = () => {
         </div>
 
         <p className="text-sm md:text-base text-white/80 max-w-sm leading-relaxed lg:pb-2">
-          ActorsGlobe was born from a simple idea: every creator deserves a worthy stage. We are building a home for actors, directors, and dreamers where craft is art, and community is everything.
+          ActorsGlobe was built on a simple belief: every talent deserves an opportunity to be discovered. We bring actors, casting directors, and creators together to build meaningful connections, discover new possibilities, and turn creative visions into stories worth telling.
         </p>
       </section>
 
@@ -66,11 +66,17 @@ export const AboutUs: React.FC = () => {
 
           {/* Centered Liquid Chrome Brand Typography */}
           <div className="relative z-10 flex items-baseline select-none">
-            <span className="font-serif-accent italic text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-normal text-white drop-shadow-[0_10px_30px_rgba(255,255,255,0.4)]">
-              actors
+            <span className="font-serif-accent italic text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white drop-shadow-[0_10px_30px_rgba(255,255,255,0.4)]">
+              Where every
             </span>
-            <span className="font-sans font-semibold text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#F7FFB8] ml-2">
-              globe
+            <span className="font-sans font-semibold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#F7FFB8] ml-2 pr-2">
+              story
+            </span>
+            <span className="font-serif-accent italic text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white drop-shadow-[0_10px_30px_rgba(255,255,255,0.4)]">
+              finds its 
+            </span>
+            <span className="font-sans font-semibold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#F7FFB8] ml-2">
+              people.
             </span>
           </div>
         </div>
@@ -81,14 +87,14 @@ export const AboutUs: React.FC = () => {
          ========================================================================= */}
       <section className="max-w-2xl mx-auto text-center flex flex-col gap-6 py-4">
         <Headline
-          text="In a world of endless scrolling, the *spark of talent* often gets lost in the noise. At ActorsGlobe, we've traded click-driven algorithms for *quality and self-expression.*"
+          text="In a world of endless scrolling, the *spark of talent* often gets lost in the noise. At ActorsGlobe, we bring *talent* and *opportunity* closer *together.*"
           as="p"
           accentColor="dune"
           className="text-xl sm:text-2xl md:text-3xl font-normal text-white leading-relaxed"
         />
 
         <Headline
-          text="We believe that *creativity knows no boundaries.* Whether it's dramatic monologue, indie cinema, or high-fashion performance — here, *your voice is heard.* Our mission is to provide you with tools not just to audition, but to *grow, inspire, and monetize your craft.*"
+          text="We believe *every performer has a story worth telling.* Whether you're pursuing your *first role, building your portfolio*, or searching for the right talent for your *next production*, ActorsGlobe gives you a place to *showcase your craft*, *discover opportunities*, and make *meaningful connections.*"
           as="p"
           accentColor="dune"
           className="text-base sm:text-lg md:text-xl font-normal text-[#D7D7DB] leading-relaxed pt-4 border-t border-white/10"
@@ -101,10 +107,10 @@ export const AboutUs: React.FC = () => {
       <section className="w-full">
         <div className="mb-8">
           <span className="text-xs md:text-sm font-medium tracking-wider text-[#8A8A90] uppercase">
-            (02) Our Partners
+            (02) Partners
           </span>
           <Headline
-            text="Our *Ecosystem & Partners*"
+            text="Our *Creative Ecosystem*"
             as="h2"
             accentColor="muted"
             className="text-2xl sm:text-3xl font-normal text-white mt-1"
@@ -155,14 +161,14 @@ export const AboutUs: React.FC = () => {
                 (03) Values
               </span>
               <Headline
-                text="Our *Core Pillars*"
+                text="Our *Core Principles*"
                 as="h2"
                 accentColor="muted"
                 className="text-3xl md:text-4xl font-normal text-white mt-1"
               />
             </div>
             <span className="text-xs md:text-sm text-white/80">
-              We support creators and performers from all over the world
+              We believe a stronger creative industry begins with opportunity, authenticity, and collaboration.
             </span>
           </div>
 
